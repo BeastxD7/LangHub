@@ -1,4 +1,13 @@
-export const sentenceData = {
+interface SentenceEntry {
+  sentence: string;
+  words: string[];
+}
+
+interface SentenceData {
+  [language: string]: SentenceEntry[];
+}
+
+export const sentenceData: SentenceData = {
     en: [
       { sentence: "The quick brown fox jumps over the lazy dog.", words: ["The", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"] },
       { sentence: "A journey of a thousand miles begins with a single step.", words: ["A", "journey", "of", "a", "thousand", "miles", "begins", "with", "a", "single", "step"] },

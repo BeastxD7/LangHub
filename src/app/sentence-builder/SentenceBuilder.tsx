@@ -4,9 +4,13 @@ import React, { useState, useEffect } from 'react';
 import { sentenceData } from '../../utils/sentenceData';
 import { motion } from 'framer-motion';
 
-interface SentenceItem {
+interface SentenceEntry {
   sentence: string;
-  options: string[];
+  words: string[];
+}
+
+interface SentenceData {
+  [language: string]: SentenceEntry[];
 }
 
 const shuffleArray = (array: any[]) => {
@@ -19,7 +23,7 @@ const shuffleArray = (array: any[]) => {
 
 const SentenceBuilder: React.FC = () => {
   const [language, setLanguage] = useState('en');
-  const [sentences, setSentences] = useState<SentenceItem[]>([]);
+  const [sentences, setSentences] = useState<SentenceEntry[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [jumbledSentence, setJumbledSentence] = useState<string[]>([]);
   const [userSentence, setUserSentence] = useState<string[]>([]);
@@ -32,24 +36,28 @@ const SentenceBuilder: React.FC = () => {
   const [correctAnswer, setCorrectAnswer] = useState<string>('');
 
   useEffect(() => {
-    const newSentences = sentenceData[language] || [];
-    setSentences(newSentences);
-    setCurrentIndex(0);
-    setUserSentence([]);
-    setAttempts(1);
-    setScore(0);
-    setFeedback(null);
-    setCorrect(null);
-    setShowNextButton(false);
-    setCorrectAnswer('');
+    const newSentences: SentenceEntry[] = sentenceData[language] || [];
+    // console.log('New Sentences:', newSentences); // Debugging line
+    if (Array.isArray(newSentences)) {
+      setSentences(newSentences);
+      setCurrentIndex(0);
+      setUserSentence([]);
+      setAttempts(1);
+      setScore(0);
+      setFeedback(null);
+      setCorrect(null);
+      setShowNextButton(false);
+      setCorrectAnswer('');
 
-    if (newSentences.length > 0) {
-      setJumbledSentence(getJumbledSentence(newSentences[0].sentence));
+      if (newSentences.length > 0) {
+        setJumbledSentence(getJumbledSentence(newSentences[0].words));
+      }
+    } else {
+      console.error('Invalid sentence data format');
     }
   }, [language]);
 
-  const getJumbledSentence = (sentence: string) => {
-    const words = [...new Set(sentence.split(' '))]; // Remove duplicate words
+  const getJumbledSentence = (words: string[]) => {
     return shuffleArray(words);
   };
 
@@ -98,7 +106,7 @@ const SentenceBuilder: React.FC = () => {
       setCurrentIndex(currentIndex + 1);
       setUserSentence([]);
       setAttempts(1);
-      setJumbledSentence(getJumbledSentence(sentences[currentIndex + 1]?.sentence || ''));
+      setJumbledSentence(getJumbledSentence(sentences[currentIndex + 1]?.words || []));
       setFeedback(null);
       setCorrect(null);
       setShowNextButton(false);

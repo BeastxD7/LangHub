@@ -18,7 +18,6 @@ const VocabularyPage = () => {
   const [inputDisabled, setInputDisabled] = useState<boolean>(false); // Disable input field after 3 attempts
 
   const definitions = (vocabularyData as { [key: string]: { word: string; definition: string; }[] })[language] || [];
-  console.log(definitions);
 
   useEffect(() => {
     setCurrentDefinitionIndex(0);
