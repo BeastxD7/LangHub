@@ -14,6 +14,7 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({ onSelectLanguage })
     <div className="flex flex-col items-center">
       <h2 className="text-xl font-semibold mb-4">Select Language for Quiz</h2>
       <select onChange={handleLanguageChange} className="px-4 py-2 border rounded">
+      <option value="null">Select Language</option>
         <option value="fr">French</option>
         <option value="es">Spanish</option>
         <option value="de">German</option>
@@ -24,6 +25,8 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({ onSelectLanguage })
         <option value="ja">Japanese</option>
         <option value="ko">Korean</option>
         <option value="ar">Arabic</option>
+        <option value="hi">Hindi</option>
+        <option value="kn">Kannada</option>
         {/* Add more languages if needed */}
       </select>
     </div>

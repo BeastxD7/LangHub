@@ -16,6 +16,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <link
+  rel="icon"
+  href="/logo.png"
+  type="image/png"
+  sizes="<generated>"
+/>
       <body className={inter.className}>{children}</body>
     </html>
   );

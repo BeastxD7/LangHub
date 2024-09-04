@@ -104,7 +104,7 @@ const SentenceBuilder: React.FC = () => {
       setShowNextButton(false);
       setCorrectAnswer('');
     } else {
-      setFeedback(`Congratulations! You have completed the sentence builder. Your score is ${score} out of ${sentences.length}.`);
+      setFeedback(`You have completed the sentence builder. Your score is ${score} out of ${sentences.length}.`);
       setShowNextButton(false);
     }
   };
