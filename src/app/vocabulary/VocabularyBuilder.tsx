@@ -1,7 +1,13 @@
 "use client";
 
 import React, { useState } from 'react';
-import { vocabulary } from '../../utils/vocabularyData';
+import { vocabularyData } from '../../utils/vocabularyData';
+
+interface VocabularyData {
+  [key: string]: { word: string; definition: string; }[];
+}
+
+const vocabulary: VocabularyData['en'] = vocabularyData['en'];
 import DefinitionCard from '../../components/DefinitionCard';
 
 interface VocabularyItem {
