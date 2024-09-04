@@ -30,7 +30,7 @@ const VocabularyPage = () => {
     setShowNextMessage(false); // Reset next message display
     setShowFinalMessage(false); // Reset final message display
     setInputDisabled(false); // Enable input field initially
-  }, [language]);
+  }, [language, definitions.length]); // Added definitions.length here
 
   useEffect(() => {
     setAttempts(0); // Reset attempts when moving to a new question
