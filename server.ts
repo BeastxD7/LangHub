@@ -6,7 +6,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000", // Adjust if needed
+    origin: ["http://localhost:3000", "https://langhub2.vercel.app:3000"], // Adjust if needed
     methods: ["GET", "POST"]
   }
 });
