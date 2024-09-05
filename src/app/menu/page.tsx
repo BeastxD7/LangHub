@@ -37,8 +37,8 @@ export default function Menu() {
         </li> 
 
         <li>
-          <Link href="/duel" className="text-blue-500 hover:underline">
-          Try Duel Multiplier
+          <Link href="/scribble" className="text-blue-500 hover:underline">
+          Scribble Multiplayer
           </Link>
         </li> 
       </ul>

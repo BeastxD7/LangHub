@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "LangHub | Made By Beast",
-  description: "The LangHub app is a language learning tool for children.",
+  description: "LangHub, an engaging language-learning platform where players immerse themselves in exciting multiplayer word games! Challenge friends and players worldwide in real-time to guess words based on creative hints and translations. Enhance your vocabulary and language skills while having fun. Join now to experience a unique blend of competitive gameplay and educational learning designed for all ages!",
 };
 
 export default function RootLayout({
