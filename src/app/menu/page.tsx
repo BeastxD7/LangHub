@@ -35,6 +35,12 @@ export default function Menu() {
           Sentence Builder
           </Link>
         </li> 
+
+        <li>
+          <Link href="/duel" className="text-blue-500 hover:underline">
+          Try Duel Multiplier
+          </Link>
+        </li> 
       </ul>
     </div>
   );
