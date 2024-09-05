@@ -2,6 +2,6 @@
 
 import { io } from 'socket.io-client';
 
-const socket = io('https://socket-server-mfkb.onrender.com:3000');
+const socket = io('https://socket-server-mfkb.onrender.com/');
 
 export default socket;
