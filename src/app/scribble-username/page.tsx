@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import socket from '../../utils/socket'; // Import the socket instance
+import socket from '../../utils/socket';
 
 type Player = {
   id: string;
@@ -19,7 +19,6 @@ type GuessData = {
 const DuelPage: React.FC = () => {
   const router = useRouter();
   const [username, setUsername] = useState<string | null>(null);
-  const [inputUsername, setInputUsername] = useState('');
   const [guess, setGuess] = useState('');
   const [receivedGuesses, setReceivedGuesses] = useState<GuessData[]>([]);
   const [currentHint, setCurrentHint] = useState<string | null>(null);
@@ -28,37 +27,36 @@ const DuelPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [gameEnded, setGameEnded] = useState(false); // Track game end
   const [leaderboard, setLeaderboard] = useState<Player[]>([]); // State for leaderboard
-  const [showStartButton, setShowStartButton] = useState(false);
 
   useEffect(() => {
-    // Retrieve username from localStorage
+    // Check if the username is stored in localStorage
     const storedUsername = localStorage.getItem('username');
     if (!storedUsername) {
+      // Redirect to the /scribble-username route if no username is found
       router.push('/scribble-username');
     } else {
       setUsername(storedUsername);
       socket.emit('setUsername', storedUsername);
     }
 
-    // Socket event handlers
-    socket.on('showStartButton', (canStart: boolean) => {
-      setShowStartButton(canStart);
-    });
-
+    // Listen for the current hint from the server
     socket.on('currentHint', (hint: string) => {
       setCurrentHint(hint);
       setIsLoading(false);
       setHintsCount((prevCount) => prevCount + 1);
     });
 
+    // Listen for guesses from the server
     socket.on('receiveGuess', (data: GuessData) => {
       setReceivedGuesses((prevGuesses) => [...prevGuesses, data]);
     });
 
+    // Listen for player updates from the server
     socket.on('updatePlayers', (players: Player[]) => {
       setPlayers(players);
     });
 
+    // Listen for leaderboard from the server
     socket.on('leaderboard', (players: Player[]) => {
       // Sort players by score in descending order
       const sortedPlayers = [...players].sort((a, b) => b.score - a.score);
@@ -66,7 +64,6 @@ const DuelPage: React.FC = () => {
     });
 
     return () => {
-      socket.off('showStartButton');
       socket.off('currentHint');
       socket.off('receiveGuess');
       socket.off('updatePlayers');
@@ -113,32 +110,7 @@ const DuelPage: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-4">
       <h1 className="text-3xl font-bold mb-6">Translation Duel</h1>
-      {!username ? (
-        <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-md">
-          <h2 className="text-xl font-semibold mb-4">Set Your Username</h2>
-          <input 
-            type="text" 
-            placeholder="Enter your username" 
-            value={inputUsername} 
-            onChange={(e) => setInputUsername(e.target.value)} 
-            className="w-full p-2 border border-gray-300 rounded mb-4"
-          />
-          <button 
-            onClick={() => {
-              if (inputUsername.trim()) {
-                localStorage.setItem('username', inputUsername.trim());
-                setUsername(inputUsername.trim());
-                setInputUsername('');
-              } else {
-                console.error('Username cannot be empty');
-              }
-            }} 
-            className="w-full py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-          >
-            Set Username
-          </button>
-        </div>
-      ) : (
+      {username ? (
         <>
           {gameEnded ? (
             <div className="bg-white p-6 rounded-xl shadow-lg w-full max-w-md">
@@ -222,10 +194,9 @@ const DuelPage: React.FC = () => {
             </>
           )}
         </>
-      )}
+      ) : null}
     </div>
   );
 };
 
 export default DuelPage;
-  

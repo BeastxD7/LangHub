@@ -22,32 +22,57 @@ const io = new Server(server, {
   }
 });
 
-const players: { id: string, username: string, score: number }[] = [];
+let players: { id: string, username: string, score: number }[] = [];
+let currentHints = getRandomHints(10); // Select 10 random hints initially
+let hintIndex = 0; // Shared among all players to synchronize questions
 
-// Select 10 random hints initially
-const currentHints = getRandomHints(10);
-let hintIndex = 0;
+// Function to calculate progress based on the hintIndex
+const getProgress = () => {
+  return Math.round((hintIndex / currentHints.length) * 100); // Progress in percentage
+};
+
+// Emit the current hint and sync all players
+const broadcastHint = () => {
+  if (currentHints[hintIndex]) {
+    io.emit('currentHint', currentHints[hintIndex].hint);
+    io.emit('progress', getProgress()); // Broadcast the current progress to all users
+    console.log('Broadcasting hint:', currentHints[hintIndex].hint);
+    console.log('Progress:', getProgress(), '%');
+  } else {
+    console.log('No more hints available');
+  }
+};
+
+// Emit the leaderboard to all players
+const updateLeaderboard = () => {
+  const sortedPlayers = [...players].sort((a, b) => b.score - a.score);
+  io.emit('leaderboard', sortedPlayers);
+};
+
+// Function to reset the game state
+const resetGame = () => {
+  currentHints = getRandomHints(10); // Reset with new random hints
+  hintIndex = 0;
+  players = players.map(player => ({ ...player, score: 0 })); // Reset players' scores
+  broadcastHint(); // Send the new first hint to all players
+  updateLeaderboard(); // Reset and update the leaderboard
+};
 
 io.on('connection', (socket: any) => {
   console.log('A user connected:', socket.id);
 
-  // Send all hints to the new user
-  socket.emit('hints', currentHints);
-
-  // Check if there are hints available before sending the current hint
+  // Send the current progress and hint to the new user
   if (currentHints.length > 0 && currentHints[hintIndex]) {
     socket.emit('currentHint', currentHints[hintIndex].hint);
-    console.log('Current hint:', currentHints[hintIndex].hint);
-    console.log('Current answer:', currentHints[hintIndex].answer);
-  } else {
-    console.log('No hints available or hintIndex out of bounds');
+    socket.emit('progress', getProgress()); // Send the current progress to the new user
+    socket.emit('updatePlayers', players); // Send current leaderboard and scores to the new user
   }
 
   // Handle the username setting
   socket.on('setUsername', (username: string) => {
     if (!players.find(player => player.id === socket.id)) {
       players.push({ id: socket.id, username, score: 0 });
-      io.emit('updatePlayers', players);
+      io.emit('updatePlayers', players); // Update player list for all clients
     }
   });
 
@@ -64,11 +89,15 @@ io.on('connection', (socket: any) => {
           player.score += 1; // Increase score if correct
           io.emit('correctGuess', { id: socket.id, username: player.username });
 
-          // Move to the next hint
+          // Move to the next hint and synchronize it for all players
           hintIndex = (hintIndex + 1) % currentHints.length;
-          if (currentHints[hintIndex]) {
-            io.emit('currentHint', currentHints[hintIndex].hint); // Send new hint to all players
-          }
+
+          // Broadcast the new hint and updated progress to all players
+          broadcastHint();
+
+          // Update the leaderboard for all players
+          updateLeaderboard();
+
         } else {
           io.emit('incorrectGuess', { guess: trimmedGuess, username: player.username });
         }
@@ -76,7 +105,7 @@ io.on('connection', (socket: any) => {
         io.emit('updatePlayers', players); // Update players with scores
 
         // Check if all hints have been used and if so, emit leaderboard
-        if (hintIndex === 0) { // Assuming you want to emit after 10 hints
+        if (hintIndex === 0) { // Assuming you want to emit after all 10 hints
           io.emit('leaderboard', players);
         }
       } else {
@@ -85,12 +114,25 @@ io.on('connection', (socket: any) => {
     }
   });
 
+  // Handle game reset
+  socket.on('resetGame', () => {
+    resetGame();
+  });
+
+  // Sync progress and questions for the newly joined player based on current state
+  socket.on('syncProgress', () => {
+    socket.emit('currentHint', currentHints[hintIndex].hint);
+    socket.emit('progress', getProgress());
+    socket.emit('updatePlayers', players); // Send current leaderboard and scores
+  });
+
+  // Handle disconnection
   socket.on('disconnect', () => {
     console.log('User disconnected:', socket.id);
     const index = players.findIndex(p => p.id === socket.id);
     if (index !== -1) {
-      players.splice(index, 1);
-      io.emit('updatePlayers', players);
+      players.splice(index, 1); // Remove player on disconnect
+      io.emit('updatePlayers', players); // Update remaining players
     }
   });
 });
