@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import socket from '../../utils/socket'; // Import the socket instance
+import { motion } from 'framer-motion';
 
 type Player = {
   id: string;
@@ -111,8 +112,14 @@ const DuelPage: React.FC = () => {
   }, [hintsCount]);
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-4">
-      <h1 className="text-3xl font-bold mb-6">Translation Duel</h1>
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-gray-900 via-indigo-900 to-purple-900 p-4">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="w-full max-w-md"
+      ></motion.div>
+      <h1 className="text-3xl text-white font-bold mb-6">Word Scribble</h1>
       {!username ? (
         <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-md">
           <h2 className="text-xl font-semibold mb-4">Set Your Username</h2>
@@ -164,16 +171,17 @@ const DuelPage: React.FC = () => {
             </div>
           ) : (
             <>
-              <div className="bg-white p-4 rounded-xl shadow-lg w-full max-w-md mb-4 lg:max-h-[462px] max-h-[230px] overflow-auto">
+      
+              <div className="rounded-xl border bg-opacity-50 border-gray-700 hover:bg-opacity-70 bg-gray-800  p-4  shadow-lg w-full max-w-md mb-4 lg:max-h-[462px] max-h-[230px] overflow-auto">
                 <div className='flex justify-between items-center'>
-                  <h2 className="text-xl font-semibold mb-4">Received Guesses</h2>
+                  <h2 className="text-xl text-white font-semibold mb-4">Received Guesses</h2>
                   {currentPlayer && (
                     <div className="bg-gray-800 text-white p-2 rounded h-10 w-24">
                       <p>Score: {currentPlayer.score}</p>
                     </div>
                   )}
                 </div>
-                <div className="bg-white p-4 rounded-lg shadow-md border mt-2 border-gray-300 overflow-auto">
+                <div className="bg-gray-800 p-4 rounded-xl border bg-opacity-50 border-gray-700  shadow-md  mt-2  overflow-auto">
                   {receivedGuesses.length === 0 ? (
                     <p className="text-gray-500">No guesses received yet.</p>
                   ) : (
@@ -187,29 +195,29 @@ const DuelPage: React.FC = () => {
               </div>
 
               {progress < 100 ? (
-                <div className="bg-white p-6 rounded-xl shadow-lg w-full max-w-md">
+                <div className="bg-gray-800 bg-opacity-50 p-6 rounded-xl shadow-lg w-full max-w-md">
                   <div className="w-full bg-gray-200 rounded-full h-2.5 mb-4">
                     <div
                       className="bg-blue-500 h-2.5 rounded-full"
                       style={{ width: `${progress}%` }}
                     />
                     <div className="flex justify-between text-sm font-medium text-gray-700">
-                      <span>Hint {hintsCount} of 10</span>
-                      <span>{Math.round(progress)}%</span>
+                      <span className='text-white mb-1'>Hint {hintsCount} of 10</span>
+                      <span className='text-white mb-1'>{Math.round(progress)}%</span>
                     </div>
                   </div>
 
-                  <h2 className="text-xl font-semibold mb-4">Current Hint:</h2>
+                  <h2 className="text-xl text-white font-semibold mb-4">Current Hint:</h2>
                   
-                  <p className="text-xl font-bold mb-4">{currentHint || 'Something went wrong! Please close tab and reload...'}</p>
+                  <p className="text-xl font-semibold  mb-4 text-white">{currentHint || 'Someone is in Game! Please close tab or reload...'}</p>
 
-                  <h2 className="text-xl font-semibold mb-4">Enter Your Guess</h2>
+                
                   <input 
                     type="text" 
                     value={guess} 
                     onChange={(e) => setGuess(e.target.value)} 
                     placeholder="Enter your guess" 
-                    className="w-full p-2 border border-gray-300 rounded mb-4"
+                    className="w-full p-2 border border-gray-600 bg-gray-800 text-white bg-opacity-50 rounded mb-4"
                   />
                   <button 
                     onClick={sendGuess} 
@@ -228,4 +236,3 @@ const DuelPage: React.FC = () => {
 };
 
 export default DuelPage;
-  

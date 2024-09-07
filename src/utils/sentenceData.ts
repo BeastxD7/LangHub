@@ -9,16 +9,16 @@ interface SentenceData {
 
 export const sentenceData: SentenceData = {
     en: [
-      { sentence: "The quick brown fox jumps over the lazy dog.", words: ["The", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"] },
-      { sentence: "A journey of a thousand miles begins with a single step.", words: ["A", "journey", "of", "a", "thousand", "miles", "begins", "with", "a", "single", "step"] },
-      { sentence: "To be, or not to be, that is the question.", words: ["To", "be", "or", "not", "to", "be", "that", "is", "the", "question"] },
-      { sentence: "All that glitters is not gold.", words: ["All", "that", "glitters", "is", "not", "gold"] },
-      { sentence: "Actions speak louder than words.", words: ["Actions", "speak", "louder", "than", "words"] },
-      { sentence: "Fortune favors the bold.", words: ["Fortune", "favors", "the", "bold"] },
-      { sentence: "The pen is mightier than the sword.", words: ["The", "pen", "is", "mightier", "than", "the", "sword"] },
-      { sentence: "Knowledge is power.", words: ["Knowledge", "is", "power"] },
-      { sentence: "Time is money.", words: ["Time", "is", "money"] },
-      { sentence: "The early bird catches the worm.", words: ["The", "early", "bird", "catches", "the", "worm"] },
+      { sentence: "The quick brown fox jumps over the lazy dog", words: ["The", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"] },
+      { sentence: "A journey of a thousand miles begins with a single step", words: ["A", "journey", "of", "a", "thousand", "miles", "begins", "with", "a", "single", "step"] },
+      { sentence: "To be, or not to be, that is the question", words: ["To", "be", "or", "not", "to", "be", "that", "is", "the", "question"] },
+      { sentence: "All that glitters is not gold", words: ["All", "that", "glitters", "is", "not", "gold"] },
+      { sentence: "Actions speak louder than words", words: ["Actions", "speak", "louder", "than", "words"] },
+      { sentence: "Fortune favors the bold", words: ["Fortune", "favors", "the", "bold"] },
+      { sentence: "The pen is mightier than the sword", words: ["The", "pen", "is", "mightier", "than", "the", "sword"] },
+      { sentence: "Knowledge is power", words: ["Knowledge", "is", "power"] },
+      { sentence: "Time is money", words: ["Time", "is", "money"] },
+      { sentence: "The early bird catches the worm", words: ["The", "early", "bird", "catches", "the", "worm"] },
     ],
     es: [
       { sentence: "El zorro marrón rápido salta sobre el perro perezoso.", words: ["El", "zorro", "marrón", "rápido", "salta", "sobre", "el", "perro", "perezoso"] },

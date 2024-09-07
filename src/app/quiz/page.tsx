@@ -73,14 +73,15 @@ export default function Quiz() {
   const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-6 lg:p-12 bg-gray-100">
+      
+    <div className="flex flex-col items-center justify-center min-h-screen p-6 lg:p-12 bg-gradient-to-br from-gray-900 via-indigo-900 to-purple-900 ">
       {!language ? (
         <LanguageSelector onSelectLanguage={handleLanguageSelect} />
       ) : (
-        <div className="w-full max-w-2xl bg-white shadow-lg rounded-lg p-6">
-          <h1 className="text-3xl font-bold mb-6 text-center">Language Quiz</h1>
+        <div className="w-full max-w-2xl bg-gray-800 bg-opacity-50 shadow-lg rounded-lg p-6">
+          <h1 className="text-3xl font-bold mb-6 text-center text-white">Language Quiz</h1>
           {loading ? (
-            <p className="text-center text-lg">Loading questions...</p>
+            <p className="text-center text-lg text-white">Loading questions...</p>
           ) : (
             <>
               {error ? (
@@ -97,15 +98,15 @@ export default function Quiz() {
                       {question ? (
                         <div className="mb-6">
                           <div className='flex justify-between items-center'>
-                          <h2 className="text-xl font-semibold mb-4">Translate: {question.phrase}</h2>
-                          <p className="text-right font-semibold text-lg">Score: {score}</p>
+                          <h2 className="text-xl font-semibold mb-4 text-white">Translate: {question.phrase}</h2>
+                          <p className="text-right font-semibold text-lg text-white">Score: {score}</p>
                           </div>
                           <div className="space-y-2 mb-4">
                             {question.options.map((option, index) => (
                               <button
                                 key={index}
                                 onClick={() => handleAnswer(option)}
-                                className={`w-full px-4 py-2 rounded text-left ${
+                                className={`bg-gray-500 text-white bg-opacity-50 w-full px-4 py-2 rounded text-left ${
                                   selectedAnswer === option
                                     ? option === question.correctAnswer
                                       ? 'bg-green-500 text-white'
@@ -148,8 +149,8 @@ export default function Quiz() {
                   className="bg-blue-500 h-2.5 rounded-full"
                   style={{ width: `${progress}%` }}
                 />
-                <div className="flex justify-between text-sm font-medium text-gray-700">
-                  <span>Question {currentQuestionIndex + 1} of {questions.length}</span>
+                <div className="flex justify-between text-sm font-medium text-white">
+                  <span >Question {currentQuestionIndex + 1} of {questions.length}</span>
                   <span>{Math.round(progress)}%</span>
                 </div>
               </div>

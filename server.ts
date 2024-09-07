@@ -25,6 +25,7 @@ const io = new Server(server, {
 let players: { id: string, username: string, score: number }[] = [];
 let currentHints = getRandomHints(10); // Select 10 random hints initially
 let hintIndex = 0; // Shared among all players to synchronize questions
+let gameStarted = false; // To check if the game has started
 
 // Function to calculate progress based on the hintIndex
 const getProgress = () => {
@@ -54,6 +55,7 @@ const resetGame = () => {
   currentHints = getRandomHints(10); // Reset with new random hints
   hintIndex = 0;
   players = players.map(player => ({ ...player, score: 0 })); // Reset players' scores
+  gameStarted = true;
   broadcastHint(); // Send the new first hint to all players
   updateLeaderboard(); // Reset and update the leaderboard
 };
@@ -107,6 +109,8 @@ io.on('connection', (socket: any) => {
         // Check if all hints have been used and if so, emit leaderboard
         if (hintIndex === 0) { // Assuming you want to emit after all 10 hints
           io.emit('leaderboard', players);
+          io.emit('gameEnded'); // Notify all players that the game has ended
+          gameStarted = false;
         }
       } else {
         console.error('Hint not found for index:', hintIndex);

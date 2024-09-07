@@ -120,15 +120,17 @@ const SentenceBuilder: React.FC = () => {
   const progress = ((currentIndex + 1) / sentences.length) * 100;
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-4">
-      <h1 className="text-3xl font-bold mb-6">Sentence Builder</h1>
-      <div className="mb-4">
-        <label htmlFor="language" className="block text-lg font-medium mb-2">Select Language:</label>
+  <>
+    <h1 className="text-3xl font-bold mb-6 text-white">Sentence Builder</h1>
+    <div className="flex flex-col items-center justify-center  max-h-screen p-10 bg-gray-800 bg-opacity-50 rounded-xl">
+      
+      <div className="mb-4 ">
+        <label htmlFor="language" className="block text-lg font-medium mb-2 text-white">Select Language:</label>
         <select
           id="language"
           value={language}
           onChange={handleLanguageChange}
-          className="border border-gray-300 p-2 rounded-md"
+          className="border border-gray-500 bg-gray-800 bg-opacity-50 p-2 text-white rounded-lg"
         >
           <option value="en">English</option>
           <option value="es">Spanish</option>
@@ -143,12 +145,12 @@ const SentenceBuilder: React.FC = () => {
           <option value="ko">Korean</option>
         </select>
       </div>
-      <div className="mb-4">
+      <div className="mb-4 ">
         {sentences.length > 0 && (
           <>
-            <div className='flex justify-between items-center'>
-            <p className="text-lg mb-2">Jumbled Sentence:</p>
-            <p className='font-semibold'>Score: {score}</p>
+            <div className='flex justify-between items-center '>
+            <p className="text-lg mb-2 text-white">Jumbled Sentence:</p>
+            <p className='font-semibold text-white'>Score: {score}</p>
             </div>
             <div className="flex flex-wrap gap-2 mb-4">
               {jumbledSentence.map((word, index) => (
@@ -161,7 +163,7 @@ const SentenceBuilder: React.FC = () => {
                 </button>
               ))}
             </div>
-            <p className="text-lg mb-2">Your Sentence:</p>
+            <p className="text-lg mb-2 text-white">Your Sentence:</p>
             <div className="flex flex-wrap gap-2 mb-4">
               {userSentence.map((word, index) => (
                 <span key={index} className="px-4 py-2 bg-gray-200 rounded">{word}</span>
@@ -223,8 +225,8 @@ const SentenceBuilder: React.FC = () => {
                 style={{ width: `${progress}%` }}
               />
               <div className="flex justify-between text-sm font-medium text-gray-700">
-                <span>Question {currentIndex + 1} of {sentences.length}</span>
-                <span>{Math.round(progress)}%</span>
+                <span className='text-white'>Question {currentIndex + 1} of {sentences.length}</span>
+                <span className='text-white'>{Math.round(progress)}%</span>
               </div>
             </div>
             
@@ -232,6 +234,7 @@ const SentenceBuilder: React.FC = () => {
         )}
       </div>
     </div>
+    </>
   );
 };
 

@@ -102,15 +102,16 @@ const VocabularyPage = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-4">
-      <h1 className="text-2xl font-bold mb-4">Vocabulary Builder</h1>
+    
+    <div className="flex flex-col items-center justify-center min-h-screen p-4 md:p-12 bg-gradient-to-br from-gray-900 via-indigo-900 to-purple-900">
+      <h1 className="text-2xl font-bold mb-4 text-white">Vocabulary Builder</h1>
       <div className="mb-4">
-        <label htmlFor="language" className="block text-lg font-medium mb-2">Select Language:</label>
+        <label htmlFor="language" className="block text-lg font-medium mb-2 text-white">Select Language:</label>
         <select
           id="language"
           value={language}
           onChange={handleLanguageChange}
-          className="border border-gray-300 p-2 rounded-md"
+          className="border border-gray-500 p-2 bg-gray-800 bg-opacity-70 text-white rounded-lg"
         >
           <option value="en">English</option>
           <option value="es">Spanish</option>
@@ -125,17 +126,17 @@ const VocabularyPage = () => {
           <option value="ko">Korean</option>
         </select>
       </div>
-      <div className="mb-4 w-full max-w-md bg-white shadow-lg rounded-lg p-6">
+      <div className="mb-4 w-full max-w-md  shadow-lg rounded-xl p-10 bg-gray-800 bg-opacity-50">
         {definitions.length > 0 && currentDefinition ? (
           <>
-            <p className="text-lg mb-2">Definition: {currentDefinition}</p>
+            <p className="text-lg mb-2 text-white">Definition: {currentDefinition}</p>
             <input
               type="text"
               value={userAnswer}
               onChange={handleAnswerChange}
               placeholder="Type your answer here"
-              className="border border-gray-300 p-2 rounded-md w-full"
-              disabled={inputDisabled} // Disable input field based on state
+              className="border border-gray-500 bg-gray-800 bg-opacity-50 p-2 rounded-lg w-full outline-none text-white"
+              disabled={inputDisabled} 
             />
             <button
               onClick={handleSubmit}
@@ -146,7 +147,7 @@ const VocabularyPage = () => {
             </button>
           </>
         ) : (
-          <p>No definitions available. Please select a language.</p>
+          <p className='text-white'>No definitions available. Please select a language.</p>
         )}
       </div>
       {feedback && (
@@ -161,7 +162,7 @@ const VocabularyPage = () => {
       )}
       {showNextMessage && (
         <motion.div
-          className="mt-4 text-lg font-semibold text-blue-500"
+          className="mt-4 text-lg font-semibold text-blue-300"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
@@ -171,22 +172,22 @@ const VocabularyPage = () => {
       )}
       {showFinalMessage && (
         <motion.div
-          className="mt-4 text-lg font-semibold text-blue-500"
+          className="mt-4 text-lg font-semibold text-blue-300"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
-          Congratulations! You have completed the vocabulary builder. Your score is {score} out of {totalQuestions}.
+           You have completed the vocabulary builder. Your score is {score} out of {totalQuestions}.
         </motion.div>
       )}
       <div className="mt-4 text-lg font-semibold">
         {definitions.length > 0 && (
-          <p>Question {currentDefinitionIndex + 1} of {totalQuestions}</p>
+          <p className='text-white'>Question {currentDefinitionIndex + 1} of {totalQuestions}</p>
         )}
       </div>
       <div className="mt-2 text-lg font-semibold">
         {definitions.length > 0 && (
-          <p>Score: {score}</p>
+          <p className='text-white'>Score: {score}</p>
         )}
       </div>
     </div>

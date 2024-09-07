@@ -1,41 +1,71 @@
+"use client";
+
+import SparklesText from "../components/magicui/sparkles-text";
+import { TextGenerateEffect } from "../components/ui/text-generate-effect";
+import React from "react";
 import Link from 'next/link';
-import Image from 'next/image';
+import { useState, useEffect } from 'react';
+import { Button } from "@/components/ui/button";
+import { motion, useAnimation } from "framer-motion";
+import TypingEffect from '../components/TypingEffect'
 
-export default function HomePage() {
+export default function LangHubDarkModernLandingPageTypewriter() {
+  const [currentFeature, setCurrentFeature] = useState(0);
+  const controls = useAnimation();
+
+  const words = ` Immerse yourself in exciting multiplayer word games and enhance your language skills!`;
+
+  const features = [
+    "Learn multiple languages",
+    "Challenge friends worldwide",
+    "Enjoy real-time gameplay",
+    "Improve your vocabulary",
+    "Track your progress",
+    "Have fun while learning"
+  ];
+
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen ">
-      {/* Hero Section */}
-      <div className="relative w-full h-screen">
-        <Image 
-          src="/hero-image.jpg" 
-          alt="Hero Image" 
-          layout="fill" 
-          objectFit="cover" 
-          className="absolute inset-0"
-        />
-        <div className="relative z-10 flex flex-col items-center justify-center h-full bg-black bg-opacity-50 text-white">
-          <h1 className="text-4xl font-bold mb-4">Get Started</h1>
-          <Link href="/menu">
-            <button className="px-6 py-3 bg-blue-500 text-white rounded">Menu</button>
-          </Link>
-        </div>
-      </div>
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-indigo-900 to-purple-900 flex items-center justify-center p-4 overflow-hidden">
+      
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="relative backdrop-blur-md bg-gray-800 bg-opacity-30 p-8 rounded-2xl shadow-2xl max-w-2xl w-full border border-gray-700"
+      >
+        <motion.div
+          initial={{ opacity: 0, y: 10 }} 
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3, duration: 0.8 }}
+          className="text-center"
+        >   
+          
+          <SparklesText className="text-white" text="LangHub" />
+          
+          <TextGenerateEffect className="text-xl sm:text-2xl text-white mb-8"  filter={true} words={words}  />
 
-      {/* Features Section */}
-      <div className="mt-8 w-full max-w-screen-lg mx-auto p-4">
-        <h2 className="text-2xl font-bold mb-4 text-center">Features</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <div className="bg-white p-6 rounded-lg shadow-lg">
-            <h3 className="text-xl font-semibold mb-2">Vocabulary Builder</h3>
-            <p>Match words with their definitions or synonyms. Improve your vocabulary through engaging exercises.</p>
+          
+
+          <div className="h-10 w-auto text-center justify-center">
+            
+              
+        <TypingEffect  features={features} />
+      
+            
           </div>
-          <div className="bg-white p-6 rounded-lg shadow-lg">
-            <h3 className="text-xl font-semibold mb-2">Sentence Builder</h3>
-            <p>Arrange jumbled words to form a correct sentence. Practice your sentence construction skills.</p>
-          </div>
-          {/* Add more feature cards as needed */}
-        </div>
-      </div>
+          <Link href="/menu" passHref>
+            <Button 
+              size="lg" 
+              className="bg-purple-600 rounded-xl mt-4 text-white hover:bg-purple-700 transition-all duration-300 transform hover:scale-105"
+            >
+              Get Started!
+            </Button>
+          </Link>
+        </motion.div>
+        <div className="absolute -top-10 -left-10 w-40 h-40 bg-purple-700 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+        <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-indigo-700 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+        <div className="absolute -bottom-8 left-20 w-40 h-40 bg-violet-700 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
+      </motion.div>
     </div>
   );
 }

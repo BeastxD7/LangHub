@@ -52,7 +52,11 @@ const WordGame: React.FC = () => {
     if (attempts < maxAttempts - 1) {
       const currentWord = words[currentIndex]?.word || '';
 
-      if (userGuess.toLowerCase() === currentWord.toLowerCase()) {
+      // Remove spaces and compare
+      const cleanedUserGuess = userGuess.replace(/\s+/g, '').toLowerCase();
+      const cleanedCurrentWord = currentWord.replace(/\s+/g, '').toLowerCase();
+
+      if (cleanedUserGuess === cleanedCurrentWord) {
         setScore(score + 1);
         setFeedback('Correct!');
         setCorrectAnswer('');
@@ -86,49 +90,51 @@ const WordGame: React.FC = () => {
       setShowNextButton(false);
       setCorrectAnswer('');
     } else {
-      setFeedback(`Congratulations! You have completed the Word Game. Your score is ${score} out of ${words.length}.`);
+      setFeedback(`You have completed the Word Game. Your score is ${score} out of ${words.length}.`);
     }
   };
 
   const progress = ((currentIndex + 1) / words.length) * 100;
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-4">
-      <div className="w-full max-w-md">
-        <h1 className="text-3xl font-bold mb-6 text-center">Word Game</h1>
-        <div className="mb-4">
+    
+    <div className="flex flex-col items-center justify-center min-h-screen p-4 md:p-12 bg-gradient-to-br from-gray-900 via-indigo-900 to-purple-900">
+      <h1 className="text-3xl font-bold mb-6 text-center  text-white">Word Game</h1>
+      <div className="w-full max-w-md bg-gray-800 bg-opacity-50 p-12 rounded-xl">
+        
+        <div className="mb-4 ">
           <div className='flex justify-between items-center'>
-          <label htmlFor="language" className="block text-lg font-medium mb-2">Select Language:</label>
-          <p className="mb-2 font-semibold">Score: {score}</p>
+          <label htmlFor="language" className="block text-lg font-medium mb-2 text-white">Select Language:</label>
+          <p className="mb-2 font-semibold text-white">Score: {score}</p>
           </div>
           <select
             id="language"
             value={language}
             onChange={handleLanguageChange}
-            className="border border-gray-300 p-2 rounded-md w-full"
+            className="border border-gray-500 bg-gray-800 bg-opacity-85 text-white p-2 rounded-lg w-full"
           >
-            <option value="en">English</option>
-            <option value="es">Spanish</option>
-            <option value="fr">French</option>
-            <option value="de">German</option>
-            <option value="it">Italian</option>
-            <option value="pt">Portuguese</option>
-            <option value="ru">Russian</option>
-            <option value="ja">Japanese</option>
-            <option value="zh">Chinese</option>
-            <option value="ar">Arabic</option>
-            <option value="ko">Korean</option>
+            <option className='bg-gray-800 bg-opacity-85' value="en">English</option>
+            <option className='bg-gray-800 bg-opacity-85' value="es">Spanish</option>
+            <option className='bg-gray-800 bg-opacity-85' value="fr">French</option>
+            <option className='bg-gray-800 bg-opacity-85' value="de">German</option>
+            <option className='bg-gray-800 bg-opacity-85' value="it">Italian</option>
+            <option className='bg-gray-800 bg-opacity-85' value="pt">Portuguese</option>
+            <option className='bg-gray-800 bg-opacity-85' value="ru">Russian</option>
+            <option className='bg-gray-800 bg-opacity-85' value="ja">Japanese</option>
+            <option className='bg-gray-800 bg-opacity-85' value="zh">Chinese</option>
+            <option className='bg-gray-800 bg-opacity-85' value="ar">Arabic</option>
+            <option className='bg-gray-800 bg-opacity-85' value="ko">Korean</option>
           </select>
         </div>
         <div className="mb-4">
-          <p className="text-lg mb-2">Hint:</p>
-          <p className="text-xl mb-4 font-medium text-center">{hint}</p>
+          <p className="text-lg mb-2 text-white">Hint:</p>
+          <p className="text-xl mb-4 font-medium text-center text-white">{hint}</p>
           <input
             type="text"
             value={userGuess}
             onChange={handleInputChange}
             placeholder="Type your guess here"
-            className="border border-gray-300 p-2 rounded-md mb-4 w-full"
+            className="border border-gray-500 text-white bg-gray-800 bg-opacity-50  p-2 rounded-lg mb-4 w-full outline-none"
           />
           <div className="mb-4 flex justify-center">
             <button
@@ -176,11 +182,10 @@ const WordGame: React.FC = () => {
                 style={{ width: `${progress}%` }}
               />
               <div className="flex justify-between text-sm font-medium text-gray-700">
-                <span>Question {currentIndex + 1} of {words.length}</span>
-                <span>{Math.round(progress)}%</span>
+                <span className='text-white'>Question {currentIndex + 1} of {words.length}</span>
+                <span className='text-white'>{Math.round(progress)}%</span>
               </div>
             </div>
-
           </div>
         )}
       </div>

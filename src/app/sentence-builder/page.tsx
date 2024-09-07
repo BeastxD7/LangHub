@@ -5,7 +5,7 @@ import SentenceBuilder from './SentenceBuilder'; // Import the SentenceBuilder c
 
 const SentenceBuilderPage = () => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
+    <div className="flex flex-col items-center justify-center min-h-screen p-4 md:p-12 bg-gradient-to-br from-gray-900 via-indigo-900 to-purple-900">
       <SentenceBuilder />
     </div>
   );
