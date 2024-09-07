@@ -147,6 +147,8 @@ const SentenceBuilder: React.FC = () => {
           <option value="zh">Chinese</option>
           <option value="ar">Arabic</option>
           <option value="ko">Korean</option>
+          <option value="kn">Kannada</option>
+          <option value="hi">Hindi</option>
         </select>
       </div>
       <div className="mb-4 ">
