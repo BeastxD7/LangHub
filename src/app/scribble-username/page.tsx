@@ -20,7 +20,7 @@ export default function ScribbleUsername() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex flex-col items-center justify-center min-h-screen p-4 md:p-12 bg-gradient-to-br from-gray-900 via-indigo-900 to-purple-900 ">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
         <h1 className="text-2xl font-semibold mb-4 text-center text-gray-700">Enter Your Username</h1>
         <form onSubmit={handleSubmit} className="flex flex-col space-y-4">

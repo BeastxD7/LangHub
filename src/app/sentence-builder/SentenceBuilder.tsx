@@ -67,11 +67,15 @@ const SentenceBuilder: React.FC = () => {
   };
 
   const handleOptionClick = (word: string) => {
-    if (userSentence.length < jumbledSentence.length && !showNextButton && !userSentence.includes(word)) {
+    const selectedCount = userSentence.filter(w => w === word).length;
+    const jumbledCount = jumbledSentence.filter(w => w === word).length;
+  
+   
+    if (userSentence.length < jumbledSentence.length && !showNextButton && selectedCount < jumbledCount) {
       setUserSentence(prev => [...prev, word]);
     }
   };
-
+  
   const handleUndo = () => {
     if (!showNextButton) {
       setUserSentence(prev => prev.slice(0, -1));
