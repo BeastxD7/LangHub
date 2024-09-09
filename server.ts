@@ -1,147 +1,254 @@
-const express = require('express');
-const http = require('http');
-const { Server } = require('socket.io');
-const fs = require('fs');
-
-// Load hints from the external JSON file
-const hints = JSON.parse(fs.readFileSync('hints.json', 'utf8'));
-console.log(hints);
-
-// Function to get 10 random hints
-const getRandomHints = (numHints: number) => {
-  const shuffled = hints.sort(() => 0.5 - Math.random());
-  return shuffled.slice(0, numHints);
-};
+import express from 'express';
+import { createServer } from 'http';
+import { Server, Socket } from 'socket.io';
+import cors from 'cors';
+import fs from 'fs';
+import path from 'path';
 
 const app = express();
-const server = http.createServer(app);
-const io = new Server(server, {
+const httpServer = createServer(app);
+const io = new Server(httpServer, {
   cors: {
-    origin: ["http://localhost:3000", "https://langhub2.vercel.app"], // Adjust if needed
-    methods: ["GET", "POST"]
-  }
+    origin: '*',
+  },
 });
 
-let players: { id: string, username: string, score: number }[] = [];
-let currentHints = getRandomHints(10); // Select 10 random hints initially
-let hintIndex = 0; // Shared among all players to synchronize questions
-let gameStarted = false; // To check if the game has started
+interface Hint {
+  text: string;
+  answer: string;
+  index?: number;  // Optional index for the hint
+  total?: number;  // Optional total number of hints
+}
 
-// Function to calculate progress based on the hintIndex
-const getProgress = () => {
-  return Math.round((hintIndex / currentHints.length) * 100); // Progress in percentage
+interface User {
+  id: string;
+  username: string;
+  score: number;
+}
+
+interface Room {
+  users: User[];
+  leader: string;
+  hints: Hint[];
+  currentHintIndex: number;
+  timer: NodeJS.Timeout | null;
+  guessedUsers: string[];
+  correctGuessMade: boolean;
+  inputDisabled: boolean; // New flag for input disablement
+}
+
+const hintsFilePath = path.join(__dirname, 'hints.json');
+
+let hints: Hint[] = [];
+try {
+  hints = JSON.parse(fs.readFileSync(hintsFilePath, 'utf8'));
+} catch (error) {
+  console.error('Failed to read hints file:', error);
+}
+
+const rooms: Record<string, Room> = {};
+const usernames: Record<string, string> = {};
+
+const broadcastRoomStatus = (roomId: string) => {
+  const room = rooms[roomId];
+  if (!room) return;
+
+  io.to(roomId).emit('room-status', {
+    players: room.users,
+    leader: room.leader,
+    inputDisabled: room.inputDisabled, // Broadcast the input disable state
+  });
 };
 
-// Emit the current hint and sync all players
-const broadcastHint = () => {
-  if (currentHints[hintIndex]) {
-    io.emit('currentHint', currentHints[hintIndex].hint);
-    io.emit('progress', getProgress()); // Broadcast the current progress to all users
-    console.log('Broadcasting hint:', currentHints[hintIndex].hint);
-    console.log('Progress:', getProgress(), '%');
-  } else {
-    console.log('No more hints available');
+const startHintSequence = (roomId: string) => {
+  const room = rooms[roomId];
+  if (!room) return;
+
+  if (room.currentHintIndex >= room.hints.length) {
+    io.to(roomId).emit('game-ended', { finalScores: room.users });
+    return;
   }
-};
 
-// Emit the leaderboard to all players
-const updateLeaderboard = () => {
-  const sortedPlayers = [...players].sort((a, b) => b.score - a.score);
-  io.emit('leaderboard', sortedPlayers);
-};
-
-// Function to reset the game state
-const resetGame = () => {
-  currentHints = getRandomHints(10); // Reset with new random hints
-  hintIndex = 0;
-  players = players.map(player => ({ ...player, score: 0 })); // Reset players' scores
-  gameStarted = true;
-  broadcastHint(); // Send the new first hint to all players
-  updateLeaderboard(); // Reset and update the leaderboard
-};
-
-io.on('connection', (socket: any) => {
-  console.log('A user connected:', socket.id);
-
-  // Send the current progress and hint to the new user
-  if (currentHints.length > 0 && currentHints[hintIndex]) {
-    socket.emit('currentHint', currentHints[hintIndex].hint);
-    socket.emit('progress', getProgress()); // Send the current progress to the new user
-    socket.emit('updatePlayers', players); // Send current leaderboard and scores to the new user
+  const hint = room.hints[room.currentHintIndex];
+  if (!hint || !hint.answer) {
+    console.error('Invalid hint data at index:', room.currentHintIndex);
+    return;
   }
 
-  // Handle the username setting
-  socket.on('setUsername', (username: string) => {
-    if (!players.find(player => player.id === socket.id)) {
-      players.push({ id: socket.id, username, score: 0 });
-      io.emit('updatePlayers', players); // Update player list for all clients
+  room.guessedUsers = [];
+  room.correctGuessMade = false;
+  room.inputDisabled = false; // Enable input at the start of a new hint
+
+  // Add hint index and total number of hints
+  io.to(roomId).emit('hint', {
+    text: hint.text,
+    index: room.currentHintIndex + 1, // Hint index starts from 1
+    total: room.hints.length, // Total number of hints
+  });
+  io.to(roomId).emit('input-disabled', { disabled: room.inputDisabled }); // Notify all users to enable input
+
+  console.log(`Hint for room ${roomId}: ${hint.text}`);
+
+  if (room.timer) clearInterval(room.timer);
+
+  let timeLeft = 10;
+  room.timer = setInterval(() => {
+    timeLeft--;
+    io.to(roomId).emit('timer-update', { timeLeft });
+    console.log(`Timer update for room ${roomId}: ${timeLeft} seconds left`);
+
+    if (timeLeft <= 0) {
+      clearInterval(room.timer!);
+
+      if (!room.correctGuessMade) {
+        io.to(roomId).emit('reveal-answer', { answer: hint.answer, correctUsername: null });
+        console.log(`Time's up! Revealing answer: ${hint.answer}`);
+
+        setTimeout(() => {
+          room.currentHintIndex++;
+          startHintSequence(roomId);
+        }, 5000);
+      }
+    }
+  }, 1000);
+};
+
+const broadcastGameStatus = (roomId: string, status: string) => {
+  io.to(roomId).emit('game-status', { status });
+  console.log(`Game status for room ${roomId}: ${status}`);
+};
+
+io.on('connection', (socket: Socket) => {
+  console.log(`New connection: ${socket.id}`);
+
+  socket.on('join-room', (roomId: string, username: string) => {
+    console.log(`${username} is joining room ${roomId}`);
+
+    if (!rooms[roomId]) {
+      rooms[roomId] = {
+        users: [],
+        leader: '',
+        hints: hints,
+        currentHintIndex: 0,
+        timer: null,
+        guessedUsers: [],
+        correctGuessMade: false,
+        inputDisabled: false, // Initialize inputDisabled
+      };
+      console.log(`Room ${roomId} created`);
+    }
+
+    const room = rooms[roomId];
+    if (room.users.some(user => user.username === username)) {
+      socket.emit('username-taken', { message: 'Username is already taken' });
+      console.log(`Username ${username} is already taken in room ${roomId}`);
+      return;
+    }
+
+    const newUser = { id: socket.id, username, score: 0 };
+    room.users.push(newUser);
+    usernames[socket.id] = username;
+
+    if (room.users.length === 1) {
+      room.leader = username;
+    }
+
+    socket.join(roomId);
+    broadcastRoomStatus(roomId);
+  });
+
+  socket.on('guess-word', ({ roomId, guess, username }: { roomId: string; guess: string; username: string }) => {
+    console.log(`Received guess from ${username} in room ${roomId}: ${guess}`);
+    const room = rooms[roomId];
+    if (!room) return;
+
+    const hint = room.hints[room.currentHintIndex];
+    if (!hint) return;
+
+    if (hint.answer.toLowerCase() === guess.toLowerCase()) {
+      if (!room.guessedUsers.includes(username)) {
+        const user = room.users.find(user => user.username === username);
+        if (user) {
+          user.score += 10;
+          io.to(roomId).emit('score-update', { username, score: user.score });
+          console.log(`${username} guessed correctly in room ${roomId}`);
+          io.to(roomId).emit('guess-result', { username, guess, isCorrect: true });
+          room.guessedUsers.push(username);
+
+          room.correctGuessMade = true;
+          room.inputDisabled = true; // Disable input for all users
+
+          io.to(roomId).emit('reveal-answer', { answer: hint.answer, correctUsername: username });
+          io.to(roomId).emit('input-disabled', { disabled: room.inputDisabled }); // Notify all users to disable input
+
+          clearInterval(room.timer!);
+
+          setTimeout(() => {
+            room.currentHintIndex++;
+            startHintSequence(roomId);
+          }, 5000);
+        }
+      } else {
+        console.log(`${username} has already guessed correctly for this hint.`);
+      }
+    } else {
+      io.to(roomId).emit('guess-result', { username, guess, isCorrect: false });
+      console.log(`${username} guessed incorrectly in room ${roomId}`);
     }
   });
 
-  // Handle the guess sending
-  socket.on('sendGuess', (guess: string) => {
-    const player = players.find(p => p.id === socket.id);
-    if (player) {
-      const trimmedGuess = guess.trim(); // Remove extra spaces
+  socket.on('start-game', (roomId: string) => {
+    console.log(`Starting game in room ${roomId}`);
+    const room = rooms[roomId];
+    if (!room) return;
 
-      // Ensure hintIndex is within bounds
-      if (currentHints[hintIndex]) {
-        const isCorrect = trimmedGuess.toLowerCase() === currentHints[hintIndex].answer.toLowerCase();
-        if (isCorrect) {
-          player.score += 1; // Increase score if correct
-          io.emit('correctGuess', { id: socket.id, username: player.username });
+    broadcastGameStatus(roomId, 'Game Started');
+    startHintSequence(roomId);
+  });
 
-          // Move to the next hint and synchronize it for all players
-          hintIndex = (hintIndex + 1) % currentHints.length;
+  socket.on('play-again', (roomId: string) => {
+    console.log(`Play again in room ${roomId}`);
+    const room = rooms[roomId];
+    if (!room) return;
 
-          // Broadcast the new hint and updated progress to all players
-          broadcastHint();
+    room.currentHintIndex = 0;
+    room.users.forEach(user => (user.score = 0));
+    room.timer && clearInterval(room.timer);
+    room.timer = null;
+    room.inputDisabled = false; // Reset inputDisabled for new game
+    io.to(roomId).emit('game-reset');
+    broadcastRoomStatus(roomId);
+    startHintSequence(roomId);
+  });
 
-          // Update the leaderboard for all players
-          updateLeaderboard();
+  socket.on('disconnect', () => {
+    console.log(`Connection disconnected: ${socket.id}`);
+    for (const roomId in rooms) {
+      const room = rooms[roomId];
+      const userIndex = room.users.findIndex(user => user.id === socket.id);
 
-        } else {
-          io.emit('incorrectGuess', { guess: trimmedGuess, username: player.username });
+      if (userIndex !== -1) {
+        console.log(`${usernames[socket.id]} disconnected from room ${roomId}`);
+        room.users.splice(userIndex, 1);
+        delete usernames[socket.id];
+        broadcastRoomStatus(roomId);
+
+        if (room.users.length === 0) {
+          console.log(`Room ${roomId} is empty and will be deleted`);
+          delete rooms[roomId];
+        } else if (room.leader === usernames[socket.id]) {
+          room.leader = room.users[0].username;
+          console.log(`New leader assigned in room ${roomId}: ${room.leader}`);
         }
-        io.emit('receiveGuess', { guess: trimmedGuess, username: player.username, isCorrect });
-        io.emit('updatePlayers', players); // Update players with scores
-
-        // Check if all hints have been used and if so, emit leaderboard
-        if (hintIndex === 0) { // Assuming you want to emit after all 10 hints
-          io.emit('leaderboard', players);
-          io.emit('gameEnded'); // Notify all players that the game has ended
-          gameStarted = false;
-        }
-      } else {
-        console.error('Hint not found for index:', hintIndex);
+        break;
       }
     }
   });
-
-  // Handle game reset
-  socket.on('resetGame', () => {
-    resetGame();
-  });
-
-  // Sync progress and questions for the newly joined player based on current state
-  socket.on('syncProgress', () => {
-    socket.emit('currentHint', currentHints[hintIndex].hint);
-    socket.emit('progress', getProgress());
-    socket.emit('updatePlayers', players); // Send current leaderboard and scores
-  });
-
-  // Handle disconnection
-  socket.on('disconnect', () => {
-    console.log('User disconnected:', socket.id);
-    const index = players.findIndex(p => p.id === socket.id);
-    if (index !== -1) {
-      players.splice(index, 1); // Remove player on disconnect
-      io.emit('updatePlayers', players); // Update remaining players
-    }
-  });
 });
 
-const PORT = process.env.PORT || 3001;
-server.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+app.use(cors());
+app.use(express.json());
+
+httpServer.listen(4000, () => {
+  console.log('Server is running on port 4000');
 });
