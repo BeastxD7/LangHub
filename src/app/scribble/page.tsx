@@ -38,7 +38,9 @@ export default function ScribblePage() {
     if (roomId.trim()) {
       try {
         const response = await fetch(
-          `http://localhost:4000/check-room/${roomId}`
+          // `http://localhost:4000/check-room/${roomId}`
+          `https://socket-server-mfkb.onrender.com/check-room/${roomId}`
+
         );
         const data = await response.json();
 
