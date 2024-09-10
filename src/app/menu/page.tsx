@@ -13,7 +13,7 @@ import { Badge } from "@/components/ui/badge";
 import Link from "next/link"; // for routing
 import { Globe, Users, Zap, Brain, Trophy, Sparkles } from "lucide-react";
 
-// Define the features array with the added link property
+
 const features = [
   {
     title: "Word Game",
