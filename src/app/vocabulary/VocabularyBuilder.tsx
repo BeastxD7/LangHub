@@ -1,14 +1,14 @@
 "use client";
 
-import React, { useState } from 'react';
-import { vocabularyData } from '../../utils/vocabularyData';
+import React, { useState } from "react";
+import { vocabularyData } from "../../utils/vocabularyData";
 
 interface VocabularyData {
-  [key: string]: { word: string; definition: string; }[];
+  [key: string]: { word: string; definition: string }[];
 }
 
-const vocabulary: VocabularyData['en'] = vocabularyData['en'];
-import DefinitionCard from '../../components/DefinitionCard';
+const vocabulary: VocabularyData["en"] = vocabularyData["en"];
+import DefinitionCard from "../../components/DefinitionCard";
 
 interface VocabularyItem {
   word: string;
@@ -29,14 +29,21 @@ const VocabularyBuilder: React.FC = () => {
   const [score, setScore] = useState<number>(0);
 
   const getRandomItem = () => {
-    const randomItem = vocabulary[Math.floor(Math.random() * vocabulary.length)];
-    const shuffledDefinitions = shuffleArray(vocabulary.map(item => item.definition));
+    const randomItem =
+      vocabulary[Math.floor(Math.random() * vocabulary.length)];
+    const shuffledDefinitions = shuffleArray(
+      vocabulary.map((item) => item.definition)
+    );
 
     setCurrentItem(randomItem);
-    setOptions(shuffleArray([
-      randomItem.definition,
-      ...shuffledDefinitions.filter(def => def !== randomItem.definition).slice(0, 3)
-    ]));
+    setOptions(
+      shuffleArray([
+        randomItem.definition,
+        ...shuffledDefinitions
+          .filter((def) => def !== randomItem.definition)
+          .slice(0, 3),
+      ])
+    );
   };
 
   const handleAnswer = (selectedDefinition: string) => {
@@ -54,7 +61,11 @@ const VocabularyBuilder: React.FC = () => {
     <div className="flex flex-col items-center justify-center min-h-screen">
       <h1 className="text-3xl font-bold mb-6">Vocabulary Builder</h1>
       {currentItem ? (
-        <DefinitionCard word={currentItem.word} options={options} onAnswer={handleAnswer} />
+        <DefinitionCard
+          word={currentItem.word}
+          options={options}
+          onAnswer={handleAnswer}
+        />
       ) : (
         <p>Loading...</p>
       )}

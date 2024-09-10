@@ -1,22 +1,29 @@
 // /app/scribble/page.tsx
-'use client';
+"use client";
 
-import { useRouter } from 'next/navigation';
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 export default function ScribblePage() {
   const router = useRouter();
-  const [roomId, setRoomId] = useState('');
+  const [roomId, setRoomId] = useState("");
   const [username, setUsername] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null); // State for error message
 
   useEffect(() => {
-    const storedUsername = localStorage.getItem('username');
+    const storedUsername = localStorage.getItem("username");
     if (!storedUsername) {
-      router.push('/scribble-username');
+      router.push("/scribble-username");
     } else {
       setUsername(storedUsername);
     }
@@ -27,9 +34,23 @@ export default function ScribblePage() {
     router.push(`/scribble/${newRoomId}`);
   };
 
-  const joinRoom = () => {
+  const joinRoom = async () => {
     if (roomId.trim()) {
-      router.push(`/scribble/${roomId}`);
+      try {
+        const response = await fetch(
+          `http://localhost:4000/check-room/${roomId}`
+        );
+        const data = await response.json();
+
+        if (data.exists) {
+          router.push(`/scribble/${roomId}`); // Redirect to the specific roomId route
+        } else {
+          setErrorMessage("No room exists with the specified Room ID"); // Set error message if room doesn't exist
+        }
+      } catch (error) {
+        console.error("Error checking room:", error);
+        setErrorMessage("An error occurred while checking the room ID."); // Set error message on error
+      }
     }
   };
 
@@ -39,24 +60,26 @@ export default function ScribblePage() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="w-full max-w-md"
-      >
+        className="w-full max-w-md">
         <Card className="bg-gray-800 bg-opacity-50 border-gray-700 hover:bg-opacity-70 transition-all duration-300">
           <CardHeader>
-            <CardTitle className="text-3xl font-bold text-white text-center">Welcome to Scribble</CardTitle>
+            <CardTitle className="text-3xl font-bold text-white text-center">
+              Welcome to Scribble
+            </CardTitle>
             <CardDescription className="text-gray-300 text-center">
-              {username ? `Hello, ${username}!` : 'Create or join a room to start playing'}
+              {username
+                ? `Hello, ${username}!`
+                : "Create or join a room to start playing"}
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
+            {errorMessage && (
+              <p className="text-red-500 text-center">{errorMessage}</p> // Display the error message
+            )}
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Button
                 onClick={createRoom}
-                className="w-full bg-purple-600 text-white font-bold py-2 px-4 rounded hover:bg-purple-700 transition"
-              >
+                className="w-full bg-purple-600 text-white font-bold py-2 px-4 rounded hover:bg-purple-700 transition">
                 Create Room
               </Button>
             </motion.div>
@@ -70,12 +93,10 @@ export default function ScribblePage() {
               />
               <motion.div
                 whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
+                whileTap={{ scale: 0.95 }}>
                 <Button
                   onClick={joinRoom}
-                  className="w-full bg-purple-600 text-white font-bold py-2 px-4 rounded hover:bg-purple-700 transition"
-                >
+                  className="w-full bg-purple-600 text-white font-bold py-2 px-4 rounded hover:bg-purple-700 transition">
                   Join Room
                 </Button>
               </motion.div>
