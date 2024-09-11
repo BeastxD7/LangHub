@@ -1,17 +1,17 @@
 // /app/scribble-username/page.tsx
-"use client";
+'use client';
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function SetUsernamePage() {
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState('');
   const router = useRouter();
 
   const handleSetUsername = () => {
     if (username) {
-      localStorage.setItem("username", username);
-      router.push("/scribble"); // Redirect to the scribble page
+      localStorage.setItem('username', username);
+      router.push('/scribble');  // Redirect to the scribble page
     }
   };
 
@@ -24,9 +24,7 @@ export default function SetUsernamePage() {
         placeholder="Enter username"
         className="border p-2"
       />
-      <button
-        onClick={handleSetUsername}
-        className="bg-blue-500 text-white p-2 mt-4">
+      <button onClick={handleSetUsername} className="bg-blue-500 text-white p-2 mt-4">
         Set Username
       </button>
     </div>
