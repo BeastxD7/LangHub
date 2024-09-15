@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link"; // for routing
-import { Globe, Users, Zap, Brain, Trophy, Sparkles } from "lucide-react";
+import { Globe, Users, Zap, Brain, Trophy, Sparkles, MessageCircle  } from "lucide-react";
 
 
 const features = [
@@ -58,6 +58,13 @@ const features = [
       "Test your knowledge of languages with quizzes covering vocabulary, grammar, and sentence structure. Track your progress and enhance your proficiency.",
     icon: Sparkles,
     link: "/quiz",
+  },
+  {
+    title: "Chat with Translation",
+    description:
+      "Send and receive messages in different languages. Messages are automatically translated into your preferred language.",
+    icon: MessageCircle ,
+    link: "/chat",
   },
 ];
 
