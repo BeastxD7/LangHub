@@ -17,8 +17,8 @@ const SetUsernamePage = () => {
 
   useEffect(() => {
     if (isSet) {
-      // Redirect to /scribble after setting the username
-      router.push('/scribble');
+      // Redirect to /chat after setting the username
+      router.push('/chat');
     }
   }, [isSet, router]);
 
