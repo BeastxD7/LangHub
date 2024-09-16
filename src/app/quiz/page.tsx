@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { translatePhrases } from "./translate";
 import LanguageSelector from "./LanguageSelector";
 import { phrases } from "../../utils/phraseData"; // Import the phrases
+import React from "react";
 
 interface Question {
   phrase: string;

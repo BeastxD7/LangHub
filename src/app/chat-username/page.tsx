@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import React from "react";
 
 const SetUsernamePage = () => {
   const [username, setUsername] = useState<string>("");
