@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { motion } from "framer-motion";
 import {
   Card,
@@ -8,8 +9,8 @@ import {
   CardDescription,
   CardContent,
   CardFooter,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+} from "../../components/ui/card";
+import { Badge } from "../../components/ui/badge";
 import Link from "next/link"; // for routing
 import { Globe, Users, Zap, Brain, Trophy, Sparkles, MessageCircle  } from "lucide-react";
 
