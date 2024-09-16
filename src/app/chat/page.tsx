@@ -6,12 +6,12 @@ import io, { Socket } from "socket.io-client";
 import { motion, AnimatePresence } from "framer-motion";
 import React from "react";
 
-// Function to generate a random color
-const getRandomColor = () => {
-  const letters = '0123456789ABCDEF';
+// Function to generate a bright random color
+const getBrightRandomColor = () => {
+  const letters = '89ABCDEF'; // Only bright hex values
   let color = '#';
   for (let i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
+    color += letters[Math.floor(Math.random() * 8)];
   }
   return color;
 };
@@ -25,12 +25,10 @@ const ChatPage = () => {
   const [message, setMessage] = useState<string>("");
   const [chat, setChat] = useState<ChatMessage[]>([]);
   const [username, setUsername] = useState<string | null>(null);
+  const [userColors, setUserColors] = useState<Record<string, string>>({});
   const router = useRouter();
   const socketRef = useRef<Socket | null>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
-
-  // Map to store user colors
-  const [userColors, setUserColors] = useState<Record<string, string>>({});
 
   useEffect(() => {
     const storedUsername = localStorage.getItem("username");
@@ -42,20 +40,35 @@ const ChatPage = () => {
 
     setUsername(storedUsername);
 
+    // Load stored colors from localStorage
+    const storedColors = localStorage.getItem("userColors");
+    if (storedColors) {
+      setUserColors(JSON.parse(storedColors));
+    }
+
     socketRef.current = io("https://chat-backend-op91.onrender.com");
-    // socketRef.current = io("https://localhost:3000/");
 
     socketRef.current.on("load-messages", (messages: ChatMessage[]) => {
       setChat(messages);
     });
 
     socketRef.current.on("message", (msg: ChatMessage) => {
-      // Assign a color to the user if they don't have one
-      setUserColors((prevColors) => ({
-        ...prevColors,
-        [msg.username]: prevColors[msg.username] || getRandomColor(),
-      }));
       setChat((prevChat) => [...prevChat, msg]);
+
+      // Assign a bright color to the user if they don't already have one
+      setUserColors((prevColors) => {
+        if (!prevColors[msg.username]) {
+          const newColor = getBrightRandomColor();
+          const updatedColors = {
+            ...prevColors,
+            [msg.username]: newColor,
+          };
+          // Save the updated colors to localStorage
+          localStorage.setItem("userColors", JSON.stringify(updatedColors));
+          return updatedColors;
+        }
+        return prevColors;
+      });
     });
 
     return () => {
