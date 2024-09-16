@@ -4,6 +4,17 @@ import { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import io, { Socket } from "socket.io-client";
 import { motion, AnimatePresence } from "framer-motion";
+import React from "react";
+
+// Function to generate a random color
+const getRandomColor = () => {
+  const letters = '0123456789ABCDEF';
+  let color = '#';
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+};
 
 interface ChatMessage {
   username: string;
@@ -18,6 +29,9 @@ const ChatPage = () => {
   const socketRef = useRef<Socket | null>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
+  // Map to store user colors
+  const [userColors, setUserColors] = useState<Record<string, string>>({});
+
   useEffect(() => {
     const storedUsername = localStorage.getItem("username");
 
@@ -28,15 +42,19 @@ const ChatPage = () => {
 
     setUsername(storedUsername);
 
-   socketRef.current = io("https://chat-backend-op91.onrender.com");
-  //  socketRef.current = io("https://localhost:3000/");
-
+    socketRef.current = io("https://chat-backend-op91.onrender.com");
+    // socketRef.current = io("https://localhost:3000/");
 
     socketRef.current.on("load-messages", (messages: ChatMessage[]) => {
       setChat(messages);
     });
 
     socketRef.current.on("message", (msg: ChatMessage) => {
+      // Assign a color to the user if they don't have one
+      setUserColors((prevColors) => ({
+        ...prevColors,
+        [msg.username]: prevColors[msg.username] || getRandomColor(),
+      }));
       setChat((prevChat) => [...prevChat, msg]);
     });
 
@@ -70,27 +88,32 @@ const ChatPage = () => {
         <h1 className="text-xl font-bold text-center">Chat Room</h1>
       </header>
       <main className="flex-grow overflow-hidden flex justify-center">
-        <div 
+        <div
           ref={chatContainerRef}
           className="w-full max-w-3xl overflow-y-auto py-4 px-4 space-y-4 scrollbar-hide"
         >
           <AnimatePresence>
             {chat.map((msg, index) => (
-              <motion.div 
-                key={index} 
+              <motion.div
+                key={index}
                 className={`flex ${msg.username === username ? 'justify-end' : 'justify-start'}`}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3 }}
               >
-                <div 
+                <div
                   className={`max-w-xs md:max-w-md lg:max-w-lg xl:max-w-xl px-4 py-2 rounded-lg shadow-md ${
-                    msg.username === username 
-                      ? 'bg-purple-600 text-white' 
-                      : 'bg-gray-700 text-gray-200'
+                    msg.username === username
+                      ? 'bg-purple-800 bg-opacity-50 z-50 text-white'
+                      : 'bg-gray-800 bg-opacity-50 text-gray-200'
                   }`}
                 >
-                  <p className="font-semibold text-sm">{msg.username}</p>
+                  <p
+                    className="font-semibold text-sm"
+                    style={{ color: userColors[msg.username] }}
+                  >
+                    {msg.username}
+                  </p>
                   <p className="mt-1">{msg.message}</p>
                 </div>
               </motion.div>
