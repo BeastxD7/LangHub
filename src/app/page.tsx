@@ -5,7 +5,7 @@ import { TextGenerateEffect } from "../components/ui/text-generate-effect";
 import React from "react";
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
+import { Button } from "../components/ui/button";
 import { motion, useAnimation } from "framer-motion";
 import TypingEffect from "../components/TypingEffect";
 
