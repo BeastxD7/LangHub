@@ -28,7 +28,9 @@ const ChatPage = () => {
 
     setUsername(storedUsername);
 
-    socketRef.current = io("https://chat-backend-zeta-beryl.vercel.app/");
+   socketRef.current = io("https://chat-backend-op91.onrender.com");
+  //  socketRef.current = io("https://localhost:3000/");
+
 
     socketRef.current.on("load-messages", (messages: ChatMessage[]) => {
       setChat(messages);
