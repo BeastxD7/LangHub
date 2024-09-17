@@ -55,8 +55,8 @@ export default function WordGuessingGame() {
   useEffect(() => {
     if (!roomId) return;
   
-   // socket = io('http://localhost:4000');
-   socket = io('https://socket-server-mfkb.onrender.com');
+   socket = io('http://localhost:4000');
+  //  socket = io('https://socket-server-mfkb.onrender.com');
   
     const storedUsername = localStorage.getItem('username');
     if (storedUsername) {
@@ -158,12 +158,16 @@ export default function WordGuessingGame() {
   
 
   const handleGuessSubmit = () => {
-    if (guess.trim() !== '') {
-      socket.emit('guess-word', { roomId, guess, username });
+    // Normalize the guess by trimming leading/trailing spaces and replacing multiple spaces with a single space
+    const normalizedGuess = guess.trim().replace(/\s+/g, ' ');
+  
+    if (normalizedGuess !== '') {
+      socket.emit('guess-word', { roomId, guess: normalizedGuess, username });
       setGuess('');
     }
   };
-
+  
+  
   const handlePlayAgain = () => {
     socket.emit('play-again', roomId);
     setShowPlayAgain(false);
