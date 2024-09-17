@@ -87,3 +87,45 @@
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+
+
+/* Notification styling */
+.fixed {
+  position: fixed;
+}
+
+.z-50 {
+  z-index: 50;
+}
+
+.bg-yellow-500 {
+  background-color: #f59e0b;
+}
+
+.text-white {
+  color: #ffffff;
+}
+
+.p-4 {
+  padding: 1rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.top-0 {
+  top: 0;
+}
+
+.right-0 {
+  right: 0;
+}
+
+.p-2 {
+  padding: 0.5rem;
+}
