@@ -129,9 +129,9 @@ const TranslationForm = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="w-full max-w-4xl bg-white bg-opacity-10 backdrop-blur-lg rounded-xl shadow-lg p-8"
+        className="w-full max-w-4xl bg-gray-800 bg-opacity-50 backdrop-blur-lg rounded-xl shadow-lg p-8"
       >
-        <h2 className="text-3xl font-bold mb-6 text-white text-center">Language Translator</h2>
+        <h2 className="text-3xl font-bold mb-6 text-white text-center">{!isFileMode ? `Text Translator` : `File Translator`}</h2>
 
         <div className="flex justify-center mb-6">
           <motion.button
