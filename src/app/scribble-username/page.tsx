@@ -41,6 +41,8 @@ const SetUsernamePage = () => {
             >
               Set Username
             </button>
+
+            
           </>
         ) : (
           <p className="text-green-400 text-center text-lg">Username set successfully!</p>

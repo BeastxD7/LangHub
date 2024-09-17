@@ -29,14 +29,14 @@ const features = [
     description:
       "Translate text between multiple languages seamlessly. Perfect for learners seeking to improve their language comprehension and translation accuracy.",
     icon: Users,
-    link: "/translate",
+    link: "/translate-language",
   },
   {
     title: "Word Scribble",
     description:
       "A fast-paced multiplayer game where players compete to guess the word based on scribbled clues. Challenge friends or others in real-time word-guessing fun",
     icon: Zap,
-    badge: "Discord",
+    badge: "Multiplayer",
     link: "/scribble",
   },
   {

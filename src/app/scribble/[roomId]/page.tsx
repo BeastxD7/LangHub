@@ -12,6 +12,7 @@ import { Progress } from "../../../components/ui/progress";
 import { Clock } from 'lucide-react';
 import React from 'react';
 
+
 interface Player {
   username: string;
   score: number;
@@ -51,6 +52,7 @@ export default function WordGuessingGame() {
   const [showCorrectWord, setShowCorrectWord] = useState(false);
   const [isGuessDisabled, setIsGuessDisabled] = useState(false);
   const [roomCode, setRoomCode] = useState('');
+
 
   useEffect(() => {
     if (!roomId) return;
