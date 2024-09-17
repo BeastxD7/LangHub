@@ -4,7 +4,8 @@ import { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import io, { Socket } from "socket.io-client";
 import { motion, AnimatePresence } from "framer-motion";
-import React from "react";
+import axios from "axios";
+import { Languages, RotateCcw } from "lucide-react";
 
 // Function to generate a bright random color
 const getBrightRandomColor = () => {
@@ -16,9 +17,55 @@ const getBrightRandomColor = () => {
   return color;
 };
 
+// Define supported languages
+const supportedLanguages = [
+  { code: "en", label: "English" },
+  { code: "es", label: "Spanish" },
+  { code: "fr", label: "French" },
+  { code: "de", label: "German" },
+  { code: "it", label: "Italian" },
+  { code: "pt", label: "Portuguese" },
+  { code: "ru", label: "Russian" },
+  { code: "zh", label: "Chinese" },
+  { code: "ja", label: "Japanese" },
+  { code: "ko", label: "Korean" },
+  { code: "ar", label: "Arabic" },
+  { code: "hi", label: "Hindi" },
+  { code: "bn", label: "Bengali" },
+  { code: "tr", label: "Turkish" },
+  { code: "vi", label: "Vietnamese" },
+  { code: "pl", label: "Polish" },
+  { code: "nl", label: "Dutch" },
+  { code: "sv", label: "Swedish" },
+  { code: "no", label: "Norwegian" },
+  { code: "da", label: "Danish" },
+  { code: "fi", label: "Finnish" },
+  { code: "cs", label: "Czech" },
+  { code: "sk", label: "Slovak" },
+  { code: "hu", label: "Hungarian" },
+  { code: "ro", label: "Romanian" },
+  { code: "he", label: "Hebrew" },
+  { code: "th", label: "Thai" },
+  { code: "ms", label: "Malay" },
+  { code: "id", label: "Indonesian" },
+  { code: "tl", label: "Tagalog" },
+  { code: "uk", label: "Ukrainian" },
+  { code: "lt", label: "Lithuanian" },
+  { code: "lv", label: "Latvian" },
+  { code: "et", label: "Estonian" },
+  { code: "sr", label: "Serbian" },
+  { code: "bs", label: "Bosnian" },
+  { code: "mk", label: "Macedonian" },
+  { code: "sq", label: "Albanian" },
+  { code: "mt", label: "Maltese" },
+  // Add more languages as needed
+];
+
+
 interface ChatMessage {
   username: string;
   message: string;
+  translated?: string; // Add optional translated field
 }
 
 const ChatPage = () => {
@@ -26,6 +73,8 @@ const ChatPage = () => {
   const [chat, setChat] = useState<ChatMessage[]>([]);
   const [username, setUsername] = useState<string | null>(null);
   const [userColors, setUserColors] = useState<Record<string, string>>({});
+  const [selectedLanguage, setSelectedLanguage] = useState<string>("es"); // Default: Spanish
+  const [translatedMessages, setTranslatedMessages] = useState<Set<number>>(new Set()); // Added state for toggling translation
   const router = useRouter();
   const socketRef = useRef<Socket | null>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
@@ -91,15 +140,72 @@ const ChatPage = () => {
     }
   };
 
+  const handleTranslate = async (index: number) => {
+    const isTranslated = translatedMessages.has(index);
+    
+    if (isTranslated) {
+      // If message is already translated, remove from set and reset to original
+      setTranslatedMessages((prev) => {
+        const newSet = new Set(prev);
+        newSet.delete(index);
+        return newSet;
+      });
+    } else {
+      // If message is not translated, fetch the translation and update state
+      const originalMessage = chat[index].message;
+      try {
+        const response = await axios.post("/api/translate", {
+          text: originalMessage,
+          targetLanguage: selectedLanguage,
+        });
+        const translatedText = response.data.translatedText;
+
+        setChat((prevChat) =>
+          prevChat.map((msg, i) =>
+            i === index ? { ...msg, translated: translatedText } : msg
+          )
+        );
+        setTranslatedMessages((prev) => new Set(prev).add(index));
+      } catch (error) {
+        console.error("Error during translation:", error);
+      }
+    }
+  };
+
+  const handleResetTranslation = (index: number) => {
+    // Reset the message to its original state
+    setTranslatedMessages((prev) => {
+      const newSet = new Set(prev);
+      newSet.delete(index);
+      return newSet;
+    });
+  };
+
   if (!username) {
     return null;
   }
 
   return (
     <div className="flex flex-col h-screen bg-gradient-to-br from-gray-900 via-indigo-900 to-purple-900">
-      <header className="bg-gray-800 bg-opacity-50 backdrop-blur-md p-4 text-white">
-        <h1 className="text-xl font-bold text-center">Chat Room</h1>
-      </header>
+      <header className="bg-gray-800 bg-opacity-50 backdrop-blur-md p-4 text-white flex justify-between items-center">
+  <h1 className="text-xl font-bold">Chat Room</h1>
+
+  {/* Language Selector Dropdown */}
+  <div className="language-selector">
+    <select
+      value={selectedLanguage}
+      onChange={(e) => setSelectedLanguage(e.target.value)}
+      className="bg-gray-700 text-white p-2 rounded-md"
+    >
+      {supportedLanguages.map((lang) => (
+        <option key={lang.code} value={lang.code}>
+          {lang.label}
+        </option>
+      ))}
+    </select>
+  </div>
+</header>
+
       <main className="flex-grow overflow-hidden flex justify-center">
         <div
           ref={chatContainerRef}
@@ -121,13 +227,36 @@ const ChatPage = () => {
                       : 'bg-gray-800 bg-opacity-50 text-gray-200'
                   }`}
                 >
-                  <p
-                    className="font-semibold text-sm"
-                    style={{ color: userColors[msg.username] }}
-                  >
-                    {msg.username}
+                  <div className="flex items-center justify-between">
+                    <p
+                      className="font-semibold text-sm"
+                      style={{ color: userColors[msg.username] }}
+                    >
+                      {msg.username}
+                    </p>
+                    <button
+                      onClick={() => {
+                        if (translatedMessages.has(index)) {
+                          handleResetTranslation(index);
+                        } else {
+                          handleTranslate(index);
+                        }
+                      }}
+                      className={`bg-gray-800 bg-opacity-50 text-white p-1 ml-4  rounded-md hover:bg-gray-700 ${
+                        translatedMessages.has(index) ? 'text-green-500' : ''
+                      }`}
+                      title={translatedMessages.has(index) ? "Reset Translation" : "Translate"}
+                    >
+                      {translatedMessages.has(index) ? (
+                        <RotateCcw className="h-5 w-5" />
+                      ) : (
+                        <Languages className="h-5 w-5" />
+                      )}
+                    </button>
+                  </div>
+                  <p className="mt-1">
+                    {translatedMessages.has(index) && msg.translated ? msg.translated : msg.message}
                   </p>
-                  <p className="mt-1">{msg.message}</p>
                 </div>
               </motion.div>
             ))}
