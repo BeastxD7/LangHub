@@ -69,7 +69,7 @@ const TranslationForm = () => {
 
   const handleTranslate = async () => {
     try {
-      const response = await axios.post('http://206.1.60.116:8080/translate', {
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_TRANSLATE}`, {
         q: text,
         source: sourceLanguage,
         target: targetLanguage,
@@ -100,7 +100,7 @@ const TranslationForm = () => {
     formData.append('api_key', 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx');
   
     try {
-      const response = await axios.post('http://206.1.60.116:8080/translate_file', formData, {
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_TRANSLATEFILE}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           'accept': 'application/json'
