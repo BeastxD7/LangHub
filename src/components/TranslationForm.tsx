@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, FileText, Download, X, Type, File } from 'lucide-react';
+import { ArrowRight, FileText, Download, X, Type, File, Loader } from 'lucide-react';
 
 const supportedLanguages = [
     { code: "en", name: "English" },
@@ -60,6 +60,7 @@ const TranslationForm = () => {
   const [downloadLink, setDownloadLink] = useState<string | null>(null);
   const [notification, setNotification] = useState<string | null>(null);
   const [isFileMode, setIsFileMode] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     if (text) {
@@ -68,6 +69,7 @@ const TranslationForm = () => {
   }, [text]);
 
   const handleTranslate = async () => {
+    setIsLoading(true);
     try {
       const response = await axios.post(`${process.env.NEXT_PUBLIC_TRANSLATE}`, {
         q: text,
@@ -78,6 +80,8 @@ const TranslationForm = () => {
     } catch (error) {
       console.error('Error translating text:', error);
       setNotification('Error translating text. Please try again.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -93,6 +97,7 @@ const TranslationForm = () => {
       return;
     }
   
+    setIsLoading(true);
     const formData = new FormData();
     formData.append('file', selectedFile);
     formData.append('source', sourceLanguage);
@@ -111,6 +116,8 @@ const TranslationForm = () => {
     } catch (error) {
       console.error('Error translating file:', error);
       setNotification('Error translating file. Please try again.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -129,7 +136,7 @@ const TranslationForm = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="w-full max-w-4xl bg-gray-800 bg-opacity-50 backdrop-blur-lg rounded-xl shadow-lg p-8"
+        className="w-full max-w-4xl bg-gray-800 bg-opacity-50 backdrop-blur-lg rounded-xl shadow-lg p-8 relative"
       >
         <h2 className="text-3xl font-bold mb-6 text-white text-center">{!isFileMode ? `Text Translator` : `File Translator`}</h2>
 
@@ -210,8 +217,15 @@ const TranslationForm = () => {
                 whileTap={{ scale: 0.95 }}
                 onClick={handleTranslate}
                 className="w-full bg-purple-600 text-white py-3 px-6 rounded-md hover:bg-purple-700 transition-colors duration-300 flex items-center justify-center"
+                disabled={isLoading}
               >
-                Translate <ArrowRight className="ml-2" />
+                {isLoading ? (
+                  <Loader className="animate-spin mr-2" />
+                ) : (
+                  <>
+                    Translate <ArrowRight className="ml-2" />
+                  </>
+                )}
               </motion.button>
 
               {translatedText && (
@@ -253,8 +267,15 @@ const TranslationForm = () => {
                 whileTap={{ scale: 0.95 }}
                 onClick={handleTranslateFile}
                 className="w-full bg-purple-600 text-white py-3 px-6 rounded-md hover:bg-purple-700 transition-colors duration-300 flex items-center justify-center"
+                disabled={isLoading}
               >
-                Translate File <ArrowRight className="ml-2" />
+                {isLoading ? (
+                  <Loader className="animate-spin mr-2" />
+                ) : (
+                  <>
+                    Translate File <ArrowRight className="ml-2" />
+                  </>
+                )}
               </motion.button>
 
               {downloadLink && (
@@ -284,18 +305,31 @@ const TranslationForm = () => {
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 50 }}
-              className="fixed bottom-4 right-4 bg-gray-800 text-white px-6 py-3 rounded-md shadow-lg flex items-center"
+              className="fixed inset-x-0 bottom-4 flex justify-center items-center"
             >
-              <span>{notification}</span>
-              <button 
-                onClick={() => setNotification(null)}
-                className="ml-4 text-gray-400 hover:text-white transition-colors duration-300"
-              >
-                <X size={18} />
-              </button>
+              <div className="bg-gray-800 text-white px-6 py-3 rounded-md shadow-lg flex items-center">
+                <span>{notification}</span>
+                <button 
+                  onClick={() => setNotification(null)}
+                  className="ml-4 text-gray-400 hover:text-white transition-colors duration-300"
+                >
+                  <X size={18} />
+                </button>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
+
+        {isLoading && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="absolute inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center rounded-xl"
+          >
+            <Loader className="w-12 h-12 text-purple-600 animate-spin" />
+          </motion.div>
+        )}
       </motion.div>
     </div>
   );
