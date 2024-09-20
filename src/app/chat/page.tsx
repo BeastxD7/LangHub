@@ -8,6 +8,7 @@ import axios from "axios";
 import { Languages, RotateCcw } from "lucide-react";
 import Notification from "../../components/Notification";
 import { SendHorizontal } from 'lucide-react';
+import React from "react";
 
 // Function to generate a bright random color
 const getBrightRandomColor = () => {
@@ -138,7 +139,7 @@ const ChatPage = () => {
   useEffect(() => {
     // Automatically close the notification after 7 seconds
     if (showNotification) {
-      const timer = setTimeout(() => setShowNotification(false), 7000);
+      const timer = setTimeout(() => setShowNotification(false), 10000);
       return () => clearTimeout(timer); // Cleanup timer on component unmount or notification state change
     }
   }, [showNotification]);
