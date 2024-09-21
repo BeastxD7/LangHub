@@ -2,7 +2,15 @@
 
 import React, { useState, useEffect } from "react";
 import { sentenceData } from "../../utils/sentenceData";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "../../components/ui/card";
+import { Button } from "../../components/ui/button";
+import { Progress } from "../../components/ui/progress";
 
 interface SentenceEntry {
   sentence: string;
@@ -37,7 +45,6 @@ const SentenceBuilder: React.FC = () => {
 
   useEffect(() => {
     const newSentences: SentenceEntry[] = sentenceData[language] || [];
-    // console.log('New Sentences:', newSentences); // Debugging line
     if (Array.isArray(newSentences)) {
       setSentences(newSentences);
       setCurrentIndex(0);
@@ -135,131 +142,159 @@ const SentenceBuilder: React.FC = () => {
   const progress = ((currentIndex + 1) / sentences.length) * 100;
 
   return (
-    <>
-      <h1 className="text-3xl font-bold mb-6 text-white">Sentence Builder</h1>
-      <div className="flex flex-col items-center justify-center  max-h-screen p-10 bg-gray-800 bg-opacity-50 rounded-xl">
-        <div className="mb-4 ">
-          <label
-            htmlFor="language"
-            className="block text-lg font-medium mb-2 text-white">
-            Select Language:
-          </label>
-          <select
-            id="language"
-            value={language}
-            onChange={handleLanguageChange}
-            className="border border-gray-500 bg-gray-800 bg-opacity-50 p-2 text-white rounded-lg">
-            <option value="en">English</option>
-            <option value="es">Spanish</option>
-            <option value="fr">French</option>
-            <option value="de">German</option>
-            <option value="it">Italian</option>
-            <option value="pt">Portuguese</option>
-            <option value="ru">Russian</option>
-            <option value="ja">Japanese</option>
-            <option value="zh">Chinese</option>
-            <option value="ar">Arabic</option>
-            <option value="ko">Korean</option>
-            <option value="kn">Kannada</option>
-            <option value="hi">Hindi</option>
-          </select>
-        </div>
-        <div className="mb-4 ">
-          {sentences.length > 0 && (
-            <>
-              <div className="flex justify-between items-center ">
-                <p className="text-lg mb-2 text-white">Jumbled Sentence:</p>
-                <p className="font-semibold text-white">Score: {score}</p>
-              </div>
-              <div className="flex flex-wrap gap-2 mb-4">
-                {jumbledSentence.map((word, index) => (
-                  <button
-                    key={index}
-                    onClick={() => handleOptionClick(word)}
-                    className="px-4 py-2 bg-blue-500 text-white rounded">
-                    {word}
-                  </button>
-                ))}
-              </div>
-              <p className="text-lg mb-2 text-white">Your Sentence:</p>
-              <div className="flex flex-wrap gap-2 mb-4">
-                {userSentence.map((word, index) => (
-                  <span key={index} className="px-4 py-2 bg-gray-200 rounded">
-                    {word}
-                  </span>
-                ))}
-              </div>
-              <div className="mb-4">
-                <button
-                  onClick={handleUndo}
-                  className="px-4 py-2 bg-gray-500 text-white rounded"
-                  disabled={userSentence.length === 0 || showNextButton}>
-                  Undo
-                </button>
-                <button
-                  onClick={handleSubmit}
-                  className="px-4 py-2 bg-blue-500 text-white rounded ml-4"
-                  disabled={
-                    userSentence.length !== jumbledSentence.length ||
-                    showNextButton
-                  }>
-                  Submit
-                </button>
-                {showNextButton && (
-                  <button
-                    onClick={handleNextQuestion}
-                    className="px-4 py-2 bg-green-500 text-white rounded ml-4">
-                    Next Question
-                  </button>
-                )}
-              </div>
-            </>
-          )}
-          {feedback && (
-            <motion.div
-              className={`mt-4 text-lg font-semibold ${
-                correct === true
-                  ? "text-green-500"
-                  : correct === false
-                  ? "text-red-500"
-                  : ""
-              }`}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5 }}>
-              {feedback}
-            </motion.div>
-          )}
-          {correctAnswer && (
-            <motion.div
-              className="mt-4 text-lg font-semibold text-green-500"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5 }}>
-              Correct Answer: {correctAnswer}
-            </motion.div>
-          )}
-        </div>
-        <div className="mt-4 text-lg font-semibold w-full">
-          {sentences.length > 0 && (
-            <>
-              <div className="w-full bg-gray-200 rounded-full h-2.5 mb-4">
-                <div
-                  className="bg-blue-500 h-2.5 rounded-full"
-                  style={{ width: `${progress}%` }}
-                />
-                <div className="flex justify-between text-sm font-medium text-gray-700">
-                  <span className="text-white">
+    <div className="flex flex-col items-center justify-center min-h-screen p-4 md:p-12 bg-gradient-to-br from-gray-900 via-indigo-900 to-purple-900">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="w-full max-w-3xl">
+        <Card className="bg-gray-800 bg-opacity-50 border-gray-700">
+          <CardHeader>
+            <CardTitle className="text-3xl font-bold text-white text-center">
+              Sentence Builder
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="mb-6">
+              <label
+                htmlFor="language"
+                className="block text-lg font-medium mb-2 text-white">
+                Select Language:
+              </label>
+              <select
+                id="language"
+                value={language}
+                onChange={handleLanguageChange}
+                className="w-full p-2 bg-gray-700 text-white border border-gray-600 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                <option value="en">English</option>
+                <option value="es">Spanish</option>
+                <option value="fr">French</option>
+                <option value="de">German</option>
+                <option value="it">Italian</option>
+                <option value="pt">Portuguese</option>
+                <option value="ru">Russian</option>
+                <option value="ja">Japanese</option>
+                <option value="zh">Chinese</option>
+                <option value="ar">Arabic</option>
+                <option value="ko">Korean</option>
+                <option value="kn">Kannada</option>
+                <option value="hi">Hindi</option>
+              </select>
+            </div>
+            {sentences.length > 0 && (
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentIndex}
+                  initial={{ opacity: 0, x: 50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -50 }}
+                  transition={{ duration: 0.5 }}>
+                  <div className="mb-6">
+                    <div className="flex justify-between items-center mb-4">
+                      <h3 className="text-xl font-semibold text-white">
+                        Jumbled Sentence:
+                      </h3>
+                      <p className="text-lg font-semibold text-purple-400">
+                        Score: {score}
+                      </p>
+                    </div>
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {jumbledSentence.map((word, index) => (
+                        <motion.button
+                          key={index}
+                          onClick={() => handleOptionClick(word)}
+                          className="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors"
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}>
+                          {word}
+                        </motion.button>
+                      ))}
+                    </div>
+                    <h3 className="text-xl font-semibold mb-2 text-white">
+                      Your Sentence:
+                    </h3>
+                    <div className="flex flex-wrap gap-2 mb-6 min-h-[50px] p-2 bg-gray-700 rounded-md">
+                      {userSentence.map((word, index) => (
+                        <motion.span
+                          key={index}
+                          className="px-4 py-2 bg-purple-600 text-white rounded-md"
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ duration: 0.3 }}>
+                          {word}
+                        </motion.span>
+                      ))}
+                    </div>
+                    <div className="flex justify-between">
+                      <Button
+                        onClick={handleUndo}
+                        disabled={userSentence.length === 0 || showNextButton}
+                        variant="secondary">
+                        Undo
+                      </Button>
+                      <Button
+                        onClick={handleSubmit}
+                        disabled={
+                          userSentence.length !== jumbledSentence.length ||
+                          showNextButton
+                        }>
+                        Submit
+                      </Button>
+                      {showNextButton && (
+                        <Button onClick={handleNextQuestion} variant="default">
+                          Next Question
+                        </Button>
+                      )}
+                    </div>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            )}
+            <AnimatePresence>
+              {feedback && (
+                <motion.div
+                  className={`mt-4 text-lg font-semibold ${
+                    correct === true
+                      ? "text-green-500"
+                      : correct === false
+                      ? "text-red-500"
+                      : "text-blue-500"
+                  }`}
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 20 }}
+                  transition={{ duration: 0.5 }}>
+                  {feedback}
+                </motion.div>
+              )}
+            </AnimatePresence>
+            <AnimatePresence>
+              {correctAnswer && (
+                <motion.div
+                  className="mt-4 text-lg font-semibold text-green-500"
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 20 }}
+                  transition={{ duration: 0.5 }}>
+                  Correct Answer: {correctAnswer}
+                </motion.div>
+              )}
+            </AnimatePresence>
+            {sentences.length > 0 && (
+              <div className="mt-6">
+                <Progress value={progress} className="h-2 mb-2" />
+                <div className="flex justify-between text-sm font-medium text-gray-400">
+                  <span>
                     Question {currentIndex + 1} of {sentences.length}
                   </span>
-                  <span className="text-white">{Math.round(progress)}%</span>
+                  <span>{Math.round(progress)}% Complete</span>
                 </div>
               </div>
-            </>
-          )}
-        </div>
-      </div>
-    </>
+            )}
+          </CardContent>
+        </Card>
+      </motion.div>
+    </div>
   );
 };
 

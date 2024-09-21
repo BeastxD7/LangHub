@@ -17,12 +17,12 @@ import { Globe, Users, Zap, Brain, Trophy, Sparkles, MessageCircle  } from "luci
 
 const features = [
   {
-    title: "Word Game",
+    title: "Word Master",
     description:
       "Engage in interactive word puzzles to challenge your language skills. Match words, find hidden terms, and more through fun and competitive gameplay.",
     icon: Globe,
     badge: "Popular",
-    link: "/wordgame",
+    link: "/wordmaster",
   },
   {
     title: "Translation Tool",
@@ -58,7 +58,7 @@ const features = [
     description:
       "Test your knowledge of languages with quizzes covering vocabulary, grammar, and sentence structure. Track your progress and enhance your proficiency.",
     icon: Sparkles,
-    link: "/quiz",
+    link: "/language-quiz",
   },
   {
     title: "Chat with Translation",

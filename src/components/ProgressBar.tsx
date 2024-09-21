@@ -12,7 +12,9 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ value, max }) => {
     <div className="relative w-full h-4 bg-gray-200 rounded">
       <div
         className="absolute top-0 left-0 h-full bg-blue-500 rounded"
-        style={{ width: `${(value / max) * 100}%` }}
+        style={{  width: `${(value / max) * 100}%`,
+        transition: "width 0.5s ease-in-out" ,
+      color: 'purple'}}
       />
     </div>
   );
