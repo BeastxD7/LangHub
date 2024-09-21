@@ -126,7 +126,7 @@ const TranslationForm = () => {
           },
         }
       );
-      setDownloadLink(response.data.translatedFileUrl);
+      setDownloadLink(response.data.translatedFileUrl.replace('http://', 'https://'));
       setNotification(
         "File translated successfully. You can now download the translated file."
       );
