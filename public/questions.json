@@ -1,643 +1,642 @@
 {
-    "en": [
-      {
-        "question": "What is the plural of 'child'?",
-        "options": ["Childs", "Children", "Childes", "Childer"],
-        "answer": "Children"
-      },
-      {
-        "question": "What is the synonym of 'happy'?",
-        "options": ["Sad", "Joyful", "Angry", "Confused"],
-        "answer": "Joyful"
-      },
-      {
-        "question": "Which word is a verb?",
-        "options": ["Quick", "Run", "Beautiful", "Happiness"],
-        "answer": "Run"
-      },
-      {
-        "question": "What is the past tense of 'go'?",
-        "options": ["Gone", "Goes", "Went", "Going"],
-        "answer": "Went"
-      },
-      {
-        "question": "What is the opposite of 'difficult'?",
-        "options": ["Easy", "Hard", "Complex", "Complicated"],
-        "answer": "Easy"
-      },
-      {
-        "question": "Which of the following is a noun?",
-        "options": ["Run", "Blue", "Apple", "Quickly"],
-        "answer": "Apple"
-      }
-    ],
-    "zh": [
-      {
-        "question": "‘孩子’的复数形式是什么？",
-        "options": ["孩子们", "儿童", "孩子的", "孩子"],
-        "answer": "儿童"
-      },
-      {
-        "question": "‘快乐’的同义词是什么？",
-        "options": ["悲伤", "愉快", "生气", "困惑"],
-        "answer": "愉快"
-      },
-      {
-        "question": "哪个词是动词？",
-        "options": ["快速", "跑", "美丽", "幸福"],
-        "answer": "跑"
-      },
-      {
-        "question": "‘去’的过去式是什么？",
-        "options": ["去了", "去", "去过", "正在去"],
-        "answer": "去了"
-      },
-      {
-        "question": "‘困难’的反义词是什么？",
-        "options": ["简单", "困难", "复杂", "复杂的"],
-        "answer": "简单"
-      },
-      {
-        "question": "下面哪个是名词？",
-        "options": ["跑", "蓝色", "苹果", "快速"],
-        "answer": "苹果"
-      }
-    ],
-    "es": [
-      {
-        "question": "¿Cuál es el plural de 'niño'?",
-        "options": ["Niños", "Niñas", "Niñoses", "Niñes"],
-        "answer": "Niños"
-      },
-      {
-        "question": "¿Cuál es un sinónimo de 'feliz'?",
-        "options": ["Triste", "Contento", "Enojado", "Confundido"],
-        "answer": "Contento"
-      },
-      {
-        "question": "¿Cuál de las siguientes es un verbo?",
-        "options": ["Rápido", "Correr", "Hermoso", "Felicidad"],
-        "answer": "Correr"
-      },
-      {
-        "question": "¿Cuál es el pasado de 'ir'?",
-        "options": ["Fui", "Voy", "Iré", "Yendo"],
-        "answer": "Fui"
-      },
-      {
-        "question": "¿Cuál es el opuesto de 'difícil'?",
-        "options": ["Fácil", "Difícil", "Complejo", "Complicado"],
-        "answer": "Fácil"
-      },
-      {
-        "question": "¿Cuál de las siguientes es un sustantivo?",
-        "options": ["Correr", "Azul", "Manzana", "Rápidamente"],
-        "answer": "Manzana"
-      }
-    ],
-    "hi": [
-      {
-        "question": "‘बच्चा’ का बहुवचन क्या है?",
-        "options": ["बच्चे", "बच्चों", "बच्चे की", "बच्चों के"],
-        "answer": "बच्चे"
-      },
-      {
-        "question": "‘खुश’ का समानार्थी शब्द क्या है?",
-        "options": ["उदास", "आनंदित", "गुस्से में", "भ्रमित"],
-        "answer": "आनंदित"
-      },
-      {
-        "question": "नीचे दिए गए में से कौन सा क्रिया है?",
-        "options": ["तेज", "दौड़", "सुंदर", "खुशी"],
-        "answer": "दौड़"
-      },
-      {
-        "question": "‘जाना’ का भूतकाल क्या है?",
-        "options": ["गया", "जाता है", "जाऊँगा", "जाते हुए"],
-        "answer": "गया"
-      },
-      {
-        "question": "‘कठिन’ का विपरीत क्या है?",
-        "options": ["आसान", "कठिन", "जटिल", "जटिल"],
-        "answer": "आसान"
-      },
-      {
-        "question": "नीचे दिए गए में से कौन सा संज्ञा है?",
-        "options": ["दौड़", "नीला", "सेब", "तेजी से"],
-        "answer": "सेब"
-      }
-    ],
-    "bn": [
-      {
-        "question": "‘শিশু’র বহুবচন কি?",
-        "options": ["শিশুরা", "শিশুরা", "শিশুদের", "শিশু"],
-        "answer": "শিশুরা"
-      },
-      {
-        "question": "‘খুশি’ এর সমার্থক শব্দ কি?",
-        "options": ["দুঃখ", "আনন্দিত", "রাগান্বিত", "বিভ্রান্ত"],
-        "answer": "আনন্দিত"
-      },
-      {
-        "question": "নিচের মধ্যে কোনটি ক্রিয়া?",
-        "options": ["দ্রুত", "দৌড়ান", "সুন্দর", "আনন্দ"],
-        "answer": "দৌড়ান"
-      },
-      {
-        "question": "‘যাওয়া’ এর অতীতকাল কি?",
-        "options": ["গেল", "যাই", "যাবো", "যাচ্ছে"],
-        "answer": "গেল"
-      },
-      {
-        "question": "‘কঠিন’ এর বিপরীত কি?",
-        "options": ["সহজ", "কঠিন", "জটিল", "জটিল"],
-        "answer": "সহজ"
-      },
-      {
-        "question": "নিচের মধ্যে কোনটি বিশেষ্য?",
-        "options": ["দৌড়", "নীল", "আপেল", "দ্রুত"],
-        "answer": "আপেল"
-      }
-    ],
-    "pt": [
-      {
-        "question": "Qual é o plural de 'menino'?",
-        "options": ["Meninos", "Meninas", "Meninoses", "Meninases"],
-        "answer": "Meninos"
-      },
-      {
-        "question": "Qual é um sinônimo de 'feliz'?",
-        "options": ["Triste", "Contente", "Bravo", "Confuso"],
-        "answer": "Contente"
-      },
-      {
-        "question": "Qual das seguintes é um verbo?",
-        "options": ["Rápido", "Correr", "Bonito", "Felicidade"],
-        "answer": "Correr"
-      },
-      {
-        "question": "Qual é o passado de 'ir'?",
-        "options": ["Fui", "Vou", "Irei", "Indo"],
-        "answer": "Fui"
-      },
-      {
-        "question": "Qual é o oposto de 'difícil'?",
-        "options": ["Fácil", "Difícil", "Complexo", "Complicado"],
-        "answer": "Fácil"
-      },
-      {
-        "question": "Qual das seguintes é um substantivo?",
-        "options": ["Correr", "Azul", "Maçã", "Rapidamente"],
-        "answer": "Maçã"
-      }
-    ],
-    "ru": [
-      {
-        "question": "Каково множественное число 'ребенок'?",
-        "options": ["Дети", "Ребята", "Малыши", "Ребенки"],
-        "answer": "Дети"
-      },
-      {
-        "question": "Какой синоним слова 'счастливый'?",
-        "options": ["Грустный", "Радостный", "Сердитый", "Смешанный"],
-        "answer": "Радостный"
-      },
-      {
-        "question": "Какое из следующих является глаголом?",
-        "options": ["Быстрый", "Бежать", "Красивый", "Счастье"],
-        "answer": "Бежать"
-      },
-      {
-        "question": "Каково прошедшее время от 'идти'?",
-        "options": ["Шел", "Идет", "Пойду", "Идучи"],
-        "answer": "Шел"
-      },
-      {
-        "question": "Какой антоним к слову 'сложный'?",
-        "options": ["Простой", "Сложный", "Комплексный", "Запутанный"],
-        "answer": "Простой"
-      },
-      {
-        "question": "Какое из следующих является существительным?",
-        "options": ["Бежать", "Синий", "Яблоко", "Быстро"],
-        "answer": "Яблоко"
-      }
-    ],
-    "ja": [
-      {
-        "question": "‘子供’の複数形は何ですか？",
-        "options": ["子供たち", "子供", "子供の", "子供達"],
-        "answer": "子供たち"
-      },
-      {
-        "question": "‘幸せ’の同義語は何ですか？",
-        "options": ["悲しい", "嬉しい", "怒っている", "混乱している"],
-        "answer": "嬉しい"
-      },
-      {
-        "question": "以下のうち動詞はどれですか？",
-        "options": ["速い", "走る", "美しい", "幸せ"],
-        "answer": "走る"
-      },
-      {
-        "question": "‘行く’の過去形は何ですか？",
-        "options": ["行った", "行く", "行きます", "行き続ける"],
-        "answer": "行った"
-      },
-      {
-        "question": "‘難しい’の反対語は何ですか？",
-        "options": ["簡単", "難しい", "複雑", "込み入った"],
-        "answer": "簡単"
-      },
-      {
-        "question": "以下のうち名詞はどれですか？",
-        "options": ["走る", "青い", "リンゴ", "速やかに"],
-        "answer": "リンゴ"
-      }
-    ],
-    "yue": [
-      {
-        "question": "‘小朋友’的複數形式是什麼？",
-        "options": ["小朋友們", "小孩", "小朋友的", "小孩們"],
-        "answer": "小朋友們"
-      },
-      {
-        "question": "‘快樂’的同義詞是什麼？",
-        "options": ["悲傷", "開心", "生氣", "困惑"],
-        "answer": "開心"
-      },
-      {
-        "question": "以下哪個是動詞？",
-        "options": ["快", "跑", "靚", "快樂"],
-        "answer": "跑"
-      },
-      {
-        "question": "‘去’的過去式是什麼？",
-        "options": ["去了", "去", "會去", "去緊"],
-        "answer": "去了"
-      },
-      {
-        "question": "‘困難’的反義詞是什麼？",
-        "options": ["容易", "困難", "複雜", "麻煩"],
-        "answer": "容易"
-      },
-      {
-        "question": "以下哪個是名詞？",
-        "options": ["跑", "藍色", "蘋果", "快"],
-        "answer": "蘋果"
-      }
-    ],
-    "vi": [
-      {
-        "question": "Số nhiều của 'đứa trẻ' là gì?",
-        "options": ["Đứa trẻ", "Trẻ em", "Con cái", "Trẻ"],
-        "answer": "Trẻ em"
-      },
-      {
-        "question": "Từ đồng nghĩa với 'hạnh phúc' là gì?",
-        "options": ["Buồn", "Vui vẻ", "Giận dữ", "Bối rối"],
-        "answer": "Vui vẻ"
-      },
-      {
-        "question": "Từ nào sau đây là động từ?",
-        "options": ["Nhanh", "Chạy", "Đẹp", "Hạnh phúc"],
-        "answer": "Chạy"
-      },
-      {
-        "question": "Thì quá khứ của 'đi' là gì?",
-        "options": ["Đã đi", "Đi", "Sẽ đi", "Đi tiếp"],
-        "answer": "Đã đi"
-      },
-      {
-        "question": "Từ nào là trái nghĩa với 'khó'?",
-        "options": ["Dễ", "Khó", "Phức tạp", "Rắc rối"],
-        "answer": "Dễ"
-      },
-      {
-        "question": "Từ nào sau đây là danh từ?",
-        "options": ["Chạy", "Xanh", "Táo", "Nhanh chóng"],
-        "answer": "Táo"
-      }
-    ],
-    "tr": [
-      {
-        "question": "'çocuk'un çoğulu nedir?",
-        "options": ["Çocuklar", "Çocuklar", "Çocuklarım", "Çocuk"],
-        "answer": "Çocuklar"
-      },
-      {
-        "question": "'mutlu'nun eş anlamlısı nedir?",
-        "options": ["Üzgün", "Sevinçli", "Kızgın", "Şaşırmış"],
-        "answer": "Sevinçli"
-      },
-      {
-        "question": "Aşağıdakilerden hangisi bir fiildir?",
-        "options": ["Hızlı", "Koşmak", "Güzel", "Mutluluk"],
-        "answer": "Koşmak"
-      },
-      {
-        "question": "'gitmek'in geçmişi nedir?",
-        "options": ["Gitti", "Gidiyor", "Gidecek", "Gidiyor"],
-        "answer": "Gitti"
-      },
-      {
-        "question": "'zor'un zıt anlamlısı nedir?",
-        "options": ["Kolay", "Zor", "Karmaşık", "Karmaşık"],
-        "answer": "Kolay"
-      },
-      {
-        "question": "Aşağıdakilerden hangisi bir isimdir?",
-        "options": ["Koşmak", "Mavi", "Elma", "Hızla"],
-        "answer": "Elma"
-      }
-    ],
-    "wu": [
-      {
-        "question": "‘细娃’个复数形式系咩？",
-        "options": ["细娃们", "细娃", "细娃个", "细娃仔"],
-        "answer": "细娃们"
-      },
-      {
-        "question": "‘开心’个同义词系咩？",
-        "options": ["伤心", "欢喜", "生气", "困惑"],
-        "answer": "欢喜"
-      },
-      {
-        "question": "以下哪个系动词？",
-        "options": ["快", "跑", "美", "开心"],
-        "answer": "跑"
-      },
-      {
-        "question": "‘走’个过去式系咩？",
-        "options": ["走过", "去", "要走", "走住"],
-        "answer": "走过"
-      },
-      {
-        "question": "‘难’个反义词系咩？",
-        "options": ["容易", "难", "复杂", "繁琐"],
-        "answer": "容易"
-      },
-      {
-        "question": "以下哪个系名词？",
-        "options": ["跑", "蓝色", "苹果", "快"],
-        "answer": "苹果"
-      }
-    ],
-    "mr": [
-      {
-        "question": "‘बाल’चा बहुच्छेद काय आहे?",
-        "options": ["बालक", "बालके", "बच्चा", "बच्चे"],
-        "answer": "बालके"
-      },
-      {
-        "question": "‘आनंदित’चा समार्थी शब्द काय आहे?",
-        "options": ["दुःखी", "खुश", "रागात", "भ्रमित"],
-        "answer": "खुश"
-      },
-      {
-        "question": "खालीलपैकी कोणते क्रियापद आहे?",
-        "options": ["जलद", "धावणे", "सुंदर", "आनंद"],
-        "answer": "धावणे"
-      },
-      {
-        "question": "‘जाणे’चा भूतकाळ काय आहे?",
-        "options": ["गेला", "जातो", "जाईन", "जात आहे"],
-        "answer": "गेला"
-      },
-      {
-        "question": "‘कठीण’चा विरुद्धार्थक काय आहे?",
-        "options": ["सोपे", "कठीण", "जटिल", "गडद"],
-        "answer": "सोपे"
-      },
-      {
-        "question": "खालीलपैकी कोणते विशेष्य आहे?",
-        "options": ["धावणे", "निळा", "सफरचंद", "जलद"],
-        "answer": "सफरचंद"
-      }
-    ],
-    "te": [
-      {
-        "question": "'పిల్ల' యొక్క బహువచనం ఏమిటి?",
-        "options": ["పిల్లలు", "పిల్లలు", "పిల్లలను", "పిల్ల"],
-        "answer": "పిల్లలు"
-      },
-      {
-        "question": "'ఆనందంగా' యొక్క సమానార్థకం ఏమిటి?",
-        "options": [" దుఃఖంగా", "సంతోషంగా", "కోపంగా", "విస్మయంగా"],
-        "answer": "సంతోషంగా"
-      },
-      {
-        "question": "క్రింద తెలిపినదిలో ఏది క్రియ?",
-        "options": ["త్వరగా", " పరుగులు", "అందమైనది", "సంతోషం"],
-        "answer": "పరుగులు"
-      },
-      {
-        "question": "'వెళ్లడం' యొక్క గత కాలం ఏమిటి?",
-        "options": ["వెళ్ళింది", "వెళ్ళింది", "వెళ్ళెను", "వెళ్ళుతోంది"],
-        "answer": "వెళ్ళింది"
-      },
-      {
-        "question": "'కష్టమైనది' యొక్క వ్యతిరేకం ఏమిటి?",
-        "options": ["సులభం", "కష్టమైనది", "జటిలమైనది", "గతించేది"],
-        "answer": "సులభం"
-      },
-      {
-        "question": "క్రింద తెలిపినదిలో ఏది సరిగ్గా ఉంది?",
-        "options": ["పరుగులు", "నీలం", "సప్తరంగు", "త్వరగా"],
-        "answer": "సప్తరంగు"
-      }
-    ],
-    "pa": [
-      {
-        "question": "‘ਬੱਚਾ’ ਦਾ ਬਹੁਵਚਨ ਕੀ ਹੈ?",
-        "options": ["ਬੱਚੇ", "ਬੱਚੇ", "ਬੱਚੇਆਂ", "ਬੱਚੇ"],
-        "answer": "ਬੱਚੇ"
-      },
-      {
-        "question": "‘ਖੁਸ਼’ ਦਾ ਸਮਾਨਾਰਥੀ ਸ਼ਬਦ ਕੀ ਹੈ?",
-        "options": ["ਉਦਾਸ", "ਖੁਸ਼", "ਗੁੱਸੇ ਵਿੱਚ", "ਭ੍ਰਮਿਤ"],
-        "answer": "ਖੁਸ਼"
-      },
-      {
-        "question": "ਹੇਠਾਂ ਦਿੱਤੇ ਵਿੱਚੋਂ ਕਿਹੜਾ ਕ੍ਰਿਆ ਹੈ?",
-        "options": ["ਤੇਜ਼", "ਦੌੜ", "ਸੁੰਦਰ", "ਖੁਸ਼ੀ"],
-        "answer": "ਦੌੜ"
-      },
-      {
-        "question": "‘ਜਾਣਾ’ ਦਾ ਭੂਤਕਾਲ ਕੀ ਹੈ?",
-        "options": ["ਗਿਆ", "ਜਾਣਾ", "ਜਾਵਾਂਗਾ", "ਜਾਂਦੇ"],
-        "answer": "ਗਿਆ"
-      },
-      {
-        "question": "‘ਕਠਿਨ’ ਦਾ ਵਿਰੋਧੀ ਕੀ ਹੈ?",
-        "options": ["ਆਸਾਨ", "ਕਠਿਨ", "ਜਟਿਲ", "ਗਲਤ"],
-        "answer": "ਆਸਾਨ"
-      },
-      {
-        "question": "ਹੇਠਾਂ ਦਿੱਤੇ ਵਿੱਚੋਂ ਕਿਹੜਾ ਸੰज्ञਾ ਹੈ?",
-        "options": ["ਦੌੜ", "ਨੀਲਾ", "ਸੇਬ", "ਤੇਜ਼"],
-        "answer": "ਸੇਬ"
-      }
-    ],
-    "ko": [
-      {
-        "question": "'아이'의 복수형은 무엇인가요?",
-        "options": ["아이들", "아기들", "아이의", "아이들"],
-        "answer": "아이들"
-      },
-      {
-        "question": "'행복한'의 동의어는 무엇인가요?",
-        "options": ["슬픈", "기쁜", "화난", "혼란스러운"],
-        "answer": "기쁜"
-      },
-      {
-        "question": "다음 중 동사는 무엇인가요?",
-        "options": ["빠른", "달리다", "아름답다", "행복"],
-        "answer": "달리다"
-      },
-      {
-        "question": "'가다'의 과거형은 무엇인가요?",
-        "options": ["갔다", "간다", "갈 것이다", "가고 있다"],
-        "answer": "갔다"
-      },
-      {
-        "question": "'어려운'의 반대말은 무엇인가요?",
-        "options": ["쉬운", "어려운", "복잡한", "복잡한"],
-        "answer": "쉬운"
-      },
-      {
-        "question": "다음 중 명사는 무엇인가요?",
-        "options": ["달리다", "파란색", "사과", "빠르게"],
-        "answer": "사과"
-      }
-    ],
-    "ta": [
-      {
-        "question": "‘குழந்தை’ என்பதற்கான பன்மை என்ன?",
-        "options": ["குழந்தைகள்", "குழந்தைகள்", "குழந்தை", "குழந்தைகள்"],
-        "answer": "குழந்தைகள்"
-      },
-      {
-        "question": "‘ சந்தோஷமான’ என்பதற்கான சமர்த்தியான சொல் என்ன?",
-        "options": ["துக்கமான", "சந்தோஷமான", "கோபமாக", "மதிப்பிழந்த"],
-        "answer": "சந்தோஷமான"
-      },
-      {
-        "question": "கீழே உள்ளவற்றில் எந்தது செயல்?",
-        "options": ["வெகுந்த", "ஓடுங்கள்", "அழகு", "சந்தோஷம்"],
-        "answer": "ஓடுங்கள்"
-      },
-      {
-        "question": "‘போக’ என்பதற்கான முந்தைய காலம் என்ன?",
-        "options": ["போனார்", "போகிறார்", "போகப்போவான்", "போய்"],
-        "answer": "போனார்"
-      },
-      {
-        "question": "‘கஷ்டமான’ என்பதற்கான எதிர்மறை என்ன?",
-        "options": ["எளிதான", "கஷ்டமான", "சிக்கலான", "சிக்கலான"],
-        "answer": "எளிதான"
-      },
-      {
-        "question": "கீழே உள்ளவற்றில் எது பெயர்?",
-        "options": ["ஓடுங்கள்", "நீல", "ஆப்பிள்", "வெகுந்த"],
-        "answer": "ஆப்பிள்"
-      }
-    ],
-    "ar": [
-      {
-        "question": "ما هو الجمع لكلمة 'طفل'؟",
-        "options": ["أطفال", "طفل", "طفلين", "طفلات"],
-        "answer": "أطفال"
-      },
-      {
-        "question": "ما هو المرادف لكلمة 'سعيد'؟",
-        "options": ["حزين", "مبتهج", "غاضب", "مرتبك"],
-        "answer": "مبتهج"
-      },
-      {
-        "question": "أي من الخيارات التالية هو فعل؟",
-        "options": ["سريع", "يجري", "جميل", "سعادة"],
-        "answer": "يجري"
-      },
-      {
-        "question": "ما هو الماضي من 'يذهب'؟",
-        "options": ["ذهب", "يذهب", "سأذهب", "يذهب"],
-        "answer": "ذهب"
-      },
-      {
-        "question": "ما هو عكس 'صعب'؟",
-        "options": ["سهل", "صعب", "معقد", "متشابك"],
-        "answer": "سهل"
-      },
-      {
-        "question": "أي من الخيارات التالية اسم؟",
-        "options": ["يجري", "أزرق", "تفاح", "سريعاً"],
-        "answer": "تفاح"
-      }
-    ],
-    "fr": [
-      {
-        "question": "Quel est le pluriel de 'enfant'?",
-        "options": ["Enfants", "Enfant", "Enfantins", "Enfant"],
-        "answer": "Enfants"
-      },
-      {
-        "question": "Quel est un synonyme de 'heureux'?",
-        "options": ["Triste", "Joyeux", "Fâché", "Confus"],
-        "answer": "Joyeux"
-      },
-      {
-        "question": "Lequel des suivants est un verbe?",
-        "options": ["Rapide", "Courir", "Beau", "Bonheur"],
-        "answer": "Courir"
-      },
-      {
-        "question": "Quel est le passé de 'aller'?",
-        "options": ["Allé", "Va", "J'irai", "Allant"],
-        "answer": "Allé"
-      },
-      {
-        "question": "Quel est l'antonyme de 'difficile'?",
-        "options": ["Facile", "Difficile", "Complexe", "Déroutant"],
-        "answer": "Facile"
-      },
-      {
-        "question": "Lequel des suivants est un nom?",
-        "options": ["Courir", "Bleu", "Pomme", "Rapidement"],
-        "answer": "Pomme"
-      }
-    ],
-    "ur": [
-      {
-        "question": "‘بچہ’ کا جمع کیا ہے؟",
-        "options": ["بچے", "بچوں", "بچوں کے", "بچوں"],
-        "answer": "بچے"
-      },
-      {
-        "question": "‘خوش’ کا مترادف کیا ہے؟",
-        "options": ["اداس", "خوش", "غصے میں", "حیران"],
-        "answer": "خوش"
-      },
-      {
-        "question": "نیچے دیے گئے میں سے کون سا فعل ہے؟",
-        "options": ["تیز", "دوڑنا", "خوبصورت", "خوشی"],
-        "answer": "دوڑنا"
-      },
-      {
-        "question": "‘جانا’ کا ماضی کیا ہے؟",
-        "options": ["گیا", "جاتا", "جاؤں گا", "جا رہا ہوں"],
-        "answer": "گیا"
-      },
-      {
-        "question": "‘مشکل’ کا متضاد کیا ہے؟",
-        "options": ["آسان", "مشکل", "پیچیدہ", "مشکل"],
-        "answer": "آسان"
-      },
-      {
-        "question": "نیچے دیے گئے میں سے کون سا اسم ہے؟",
-        "options": ["دوڑ", "نیلا", "سیب", "تیز"],
-        "answer": "سیب"
-      }
-    ]
-  }
-  
+  "en": [
+    {
+      "question": "What is the plural of 'child'?",
+      "options": ["Childs", "Children", "Childes", "Childer"],
+      "answer": "Children"
+    },
+    {
+      "question": "What is the synonym of 'happy'?",
+      "options": ["Sad", "Joyful", "Angry", "Confused"],
+      "answer": "Joyful"
+    },
+    {
+      "question": "Which word is a verb?",
+      "options": ["Quick", "Run", "Beautiful", "Happiness"],
+      "answer": "Run"
+    },
+    {
+      "question": "What is the past tense of 'go'?",
+      "options": ["Gone", "Goes", "Went", "Going"],
+      "answer": "Went"
+    },
+    {
+      "question": "What is the opposite of 'difficult'?",
+      "options": ["Easy", "Hard", "Complex", "Complicated"],
+      "answer": "Easy"
+    },
+    {
+      "question": "Which of the following is a noun?",
+      "options": ["Run", "Blue", "Apple", "Quickly"],
+      "answer": "Apple"
+    }
+  ],
+  "zh": [
+    {
+      "question": "‘孩子’的复数形式是什么？",
+      "options": ["孩子们", "儿童", "孩子的", "孩子"],
+      "answer": "儿童"
+    },
+    {
+      "question": "‘快乐’的同义词是什么？",
+      "options": ["悲伤", "愉快", "生气", "困惑"],
+      "answer": "愉快"
+    },
+    {
+      "question": "哪个词是动词？",
+      "options": ["快速", "跑", "美丽", "幸福"],
+      "answer": "跑"
+    },
+    {
+      "question": "‘去’的过去式是什么？",
+      "options": ["去了", "去", "去过", "正在去"],
+      "answer": "去了"
+    },
+    {
+      "question": "‘困难’的反义词是什么？",
+      "options": ["简单", "困难", "复杂", "复杂的"],
+      "answer": "简单"
+    },
+    {
+      "question": "下面哪个是名词？",
+      "options": ["跑", "蓝色", "苹果", "快速"],
+      "answer": "苹果"
+    }
+  ],
+  "es": [
+    {
+      "question": "¿Cuál es el plural de 'niño'?",
+      "options": ["Niños", "Niñas", "Niñoses", "Niñes"],
+      "answer": "Niños"
+    },
+    {
+      "question": "¿Cuál es un sinónimo de 'feliz'?",
+      "options": ["Triste", "Contento", "Enojado", "Confundido"],
+      "answer": "Contento"
+    },
+    {
+      "question": "¿Cuál de las siguientes es un verbo?",
+      "options": ["Rápido", "Correr", "Hermoso", "Felicidad"],
+      "answer": "Correr"
+    },
+    {
+      "question": "¿Cuál es el pasado de 'ir'?",
+      "options": ["Fui", "Voy", "Iré", "Yendo"],
+      "answer": "Fui"
+    },
+    {
+      "question": "¿Cuál es el opuesto de 'difícil'?",
+      "options": ["Fácil", "Difícil", "Complejo", "Complicado"],
+      "answer": "Fácil"
+    },
+    {
+      "question": "¿Cuál de las siguientes es un sustantivo?",
+      "options": ["Correr", "Azul", "Manzana", "Rápidamente"],
+      "answer": "Manzana"
+    }
+  ],
+  "hi": [
+    {
+      "question": "‘बच्चा’ का बहुवचन क्या है?",
+      "options": ["बच्चे", "बच्चों", "बच्चे की", "बच्चों के"],
+      "answer": "बच्चे"
+    },
+    {
+      "question": "‘खुश’ का समानार्थी शब्द क्या है?",
+      "options": ["उदास", "आनंदित", "गुस्से में", "भ्रमित"],
+      "answer": "आनंदित"
+    },
+    {
+      "question": "नीचे दिए गए में से कौन सा क्रिया है?",
+      "options": ["तेज", "दौड़", "सुंदर", "खुशी"],
+      "answer": "दौड़"
+    },
+    {
+      "question": "‘जाना’ का भूतकाल क्या है?",
+      "options": ["गया", "जाता है", "जाऊँगा", "जाते हुए"],
+      "answer": "गया"
+    },
+    {
+      "question": "‘कठिन’ का विपरीत क्या है?",
+      "options": ["आसान", "कठिन", "जटिल", "जटिल"],
+      "answer": "आसान"
+    },
+    {
+      "question": "नीचे दिए गए में से कौन सा संज्ञा है?",
+      "options": ["दौड़", "नीला", "सेब", "तेजी से"],
+      "answer": "सेब"
+    }
+  ],
+  "bn": [
+    {
+      "question": "‘শিশু’র বহুবচন কি?",
+      "options": ["শিশুরা", "শিশুরা", "শিশুদের", "শিশু"],
+      "answer": "শিশুরা"
+    },
+    {
+      "question": "‘খুশি’ এর সমার্থক শব্দ কি?",
+      "options": ["দুঃখ", "আনন্দিত", "রাগান্বিত", "বিভ্রান্ত"],
+      "answer": "আনন্দিত"
+    },
+    {
+      "question": "নিচের মধ্যে কোনটি ক্রিয়া?",
+      "options": ["দ্রুত", "দৌড়ান", "সুন্দর", "আনন্দ"],
+      "answer": "দৌড়ান"
+    },
+    {
+      "question": "‘যাওয়া’ এর অতীতকাল কি?",
+      "options": ["গেল", "যাই", "যাবো", "যাচ্ছে"],
+      "answer": "গেল"
+    },
+    {
+      "question": "‘কঠিন’ এর বিপরীত কি?",
+      "options": ["সহজ", "কঠিন", "জটিল", "জটিল"],
+      "answer": "সহজ"
+    },
+    {
+      "question": "নিচের মধ্যে কোনটি বিশেষ্য?",
+      "options": ["দৌড়", "নীল", "আপেল", "দ্রুত"],
+      "answer": "আপেল"
+    }
+  ],
+  "pt": [
+    {
+      "question": "Qual é o plural de 'menino'?",
+      "options": ["Meninos", "Meninas", "Meninoses", "Meninases"],
+      "answer": "Meninos"
+    },
+    {
+      "question": "Qual é um sinônimo de 'feliz'?",
+      "options": ["Triste", "Contente", "Bravo", "Confuso"],
+      "answer": "Contente"
+    },
+    {
+      "question": "Qual das seguintes é um verbo?",
+      "options": ["Rápido", "Correr", "Bonito", "Felicidade"],
+      "answer": "Correr"
+    },
+    {
+      "question": "Qual é o passado de 'ir'?",
+      "options": ["Fui", "Vou", "Irei", "Indo"],
+      "answer": "Fui"
+    },
+    {
+      "question": "Qual é o oposto de 'difícil'?",
+      "options": ["Fácil", "Difícil", "Complexo", "Complicado"],
+      "answer": "Fácil"
+    },
+    {
+      "question": "Qual das seguintes é um substantivo?",
+      "options": ["Correr", "Azul", "Maçã", "Rapidamente"],
+      "answer": "Maçã"
+    }
+  ],
+  "ru": [
+    {
+      "question": "Каково множественное число 'ребенок'?",
+      "options": ["Дети", "Ребята", "Малыши", "Ребенки"],
+      "answer": "Дети"
+    },
+    {
+      "question": "Какой синоним слова 'счастливый'?",
+      "options": ["Грустный", "Радостный", "Сердитый", "Смешанный"],
+      "answer": "Радостный"
+    },
+    {
+      "question": "Какое из следующих является глаголом?",
+      "options": ["Быстрый", "Бежать", "Красивый", "Счастье"],
+      "answer": "Бежать"
+    },
+    {
+      "question": "Каково прошедшее время от 'идти'?",
+      "options": ["Шел", "Идет", "Пойду", "Идучи"],
+      "answer": "Шел"
+    },
+    {
+      "question": "Какой антоним к слову 'сложный'?",
+      "options": ["Простой", "Сложный", "Комплексный", "Запутанный"],
+      "answer": "Простой"
+    },
+    {
+      "question": "Какое из следующих является существительным?",
+      "options": ["Бежать", "Синий", "Яблоко", "Быстро"],
+      "answer": "Яблоко"
+    }
+  ],
+  "ja": [
+    {
+      "question": "‘子供’の複数形は何ですか？",
+      "options": ["子供たち", "子供", "子供の", "子供達"],
+      "answer": "子供たち"
+    },
+    {
+      "question": "‘幸せ’の同義語は何ですか？",
+      "options": ["悲しい", "嬉しい", "怒っている", "混乱している"],
+      "answer": "嬉しい"
+    },
+    {
+      "question": "以下のうち動詞はどれですか？",
+      "options": ["速い", "走る", "美しい", "幸せ"],
+      "answer": "走る"
+    },
+    {
+      "question": "‘行く’の過去形は何ですか？",
+      "options": ["行った", "行く", "行きます", "行き続ける"],
+      "answer": "行った"
+    },
+    {
+      "question": "‘難しい’の反対語は何ですか？",
+      "options": ["簡単", "難しい", "複雑", "込み入った"],
+      "answer": "簡単"
+    },
+    {
+      "question": "以下のうち名詞はどれですか？",
+      "options": ["走る", "青い", "リンゴ", "速やかに"],
+      "answer": "リンゴ"
+    }
+  ],
+  "yue": [
+    {
+      "question": "‘小朋友’的複數形式是什麼？",
+      "options": ["小朋友們", "小孩", "小朋友的", "小孩們"],
+      "answer": "小朋友們"
+    },
+    {
+      "question": "‘快樂’的同義詞是什麼？",
+      "options": ["悲傷", "開心", "生氣", "困惑"],
+      "answer": "開心"
+    },
+    {
+      "question": "以下哪個是動詞？",
+      "options": ["快", "跑", "靚", "快樂"],
+      "answer": "跑"
+    },
+    {
+      "question": "‘去’的過去式是什麼？",
+      "options": ["去了", "去", "會去", "去緊"],
+      "answer": "去了"
+    },
+    {
+      "question": "‘困難’的反義詞是什麼？",
+      "options": ["容易", "困難", "複雜", "麻煩"],
+      "answer": "容易"
+    },
+    {
+      "question": "以下哪個是名詞？",
+      "options": ["跑", "藍色", "蘋果", "快"],
+      "answer": "蘋果"
+    }
+  ],
+  "vi": [
+    {
+      "question": "Số nhiều của 'đứa trẻ' là gì?",
+      "options": ["Đứa trẻ", "Trẻ em", "Con cái", "Trẻ"],
+      "answer": "Trẻ em"
+    },
+    {
+      "question": "Từ đồng nghĩa với 'hạnh phúc' là gì?",
+      "options": ["Buồn", "Vui vẻ", "Giận dữ", "Bối rối"],
+      "answer": "Vui vẻ"
+    },
+    {
+      "question": "Từ nào sau đây là động từ?",
+      "options": ["Nhanh", "Chạy", "Đẹp", "Hạnh phúc"],
+      "answer": "Chạy"
+    },
+    {
+      "question": "Thì quá khứ của 'đi' là gì?",
+      "options": ["Đã đi", "Đi", "Sẽ đi", "Đi tiếp"],
+      "answer": "Đã đi"
+    },
+    {
+      "question": "Từ nào là trái nghĩa với 'khó'?",
+      "options": ["Dễ", "Khó", "Phức tạp", "Rắc rối"],
+      "answer": "Dễ"
+    },
+    {
+      "question": "Từ nào sau đây là danh từ?",
+      "options": ["Chạy", "Xanh", "Táo", "Nhanh chóng"],
+      "answer": "Táo"
+    }
+  ],
+  "tr": [
+    {
+      "question": "'çocuk'un çoğulu nedir?",
+      "options": ["Çocuklar", "Çocuklar", "Çocuklarım", "Çocuk"],
+      "answer": "Çocuklar"
+    },
+    {
+      "question": "'mutlu'nun eş anlamlısı nedir?",
+      "options": ["Üzgün", "Sevinçli", "Kızgın", "Şaşırmış"],
+      "answer": "Sevinçli"
+    },
+    {
+      "question": "Aşağıdakilerden hangisi bir fiildir?",
+      "options": ["Hızlı", "Koşmak", "Güzel", "Mutluluk"],
+      "answer": "Koşmak"
+    },
+    {
+      "question": "'gitmek'in geçmişi nedir?",
+      "options": ["Gitti", "Gidiyor", "Gidecek", "Gidiyor"],
+      "answer": "Gitti"
+    },
+    {
+      "question": "'zor'un zıt anlamlısı nedir?",
+      "options": ["Kolay", "Zor", "Karmaşık", "Karmaşık"],
+      "answer": "Kolay"
+    },
+    {
+      "question": "Aşağıdakilerden hangisi bir isimdir?",
+      "options": ["Koşmak", "Mavi", "Elma", "Hızla"],
+      "answer": "Elma"
+    }
+  ],
+  "wu": [
+    {
+      "question": "‘细娃’个复数形式系咩？",
+      "options": ["细娃们", "细娃", "细娃个", "细娃仔"],
+      "answer": "细娃们"
+    },
+    {
+      "question": "‘开心’个同义词系咩？",
+      "options": ["伤心", "欢喜", "生气", "困惑"],
+      "answer": "欢喜"
+    },
+    {
+      "question": "以下哪个系动词？",
+      "options": ["快", "跑", "美", "开心"],
+      "answer": "跑"
+    },
+    {
+      "question": "‘走’个过去式系咩？",
+      "options": ["走过", "去", "要走", "走住"],
+      "answer": "走过"
+    },
+    {
+      "question": "‘难’个反义词系咩？",
+      "options": ["容易", "难", "复杂", "繁琐"],
+      "answer": "容易"
+    },
+    {
+      "question": "以下哪个系名词？",
+      "options": ["跑", "蓝色", "苹果", "快"],
+      "answer": "苹果"
+    }
+  ],
+  "mr": [
+    {
+      "question": "‘बाल’चा बहुच्छेद काय आहे?",
+      "options": ["बालक", "बालके", "बच्चा", "बच्चे"],
+      "answer": "बालके"
+    },
+    {
+      "question": "‘आनंदित’चा समार्थी शब्द काय आहे?",
+      "options": ["दुःखी", "खुश", "रागात", "भ्रमित"],
+      "answer": "खुश"
+    },
+    {
+      "question": "खालीलपैकी कोणते क्रियापद आहे?",
+      "options": ["जलद", "धावणे", "सुंदर", "आनंद"],
+      "answer": "धावणे"
+    },
+    {
+      "question": "‘जाणे’चा भूतकाळ काय आहे?",
+      "options": ["गेला", "जातो", "जाईन", "जात आहे"],
+      "answer": "गेला"
+    },
+    {
+      "question": "‘कठीण’चा विरुद्धार्थक काय आहे?",
+      "options": ["सोपे", "कठीण", "जटिल", "गडद"],
+      "answer": "सोपे"
+    },
+    {
+      "question": "खालीलपैकी कोणते विशेष्य आहे?",
+      "options": ["धावणे", "निळा", "सफरचंद", "जलद"],
+      "answer": "सफरचंद"
+    }
+  ],
+  "te": [
+    {
+      "question": "'పిల్ల' యొక్క బహువచనం ఏమిటి?",
+      "options": ["పిల్లలు", "పిల్లలు", "పిల్లలను", "పిల్ల"],
+      "answer": "పిల్లలు"
+    },
+    {
+      "question": "'ఆనందంగా' యొక్క సమానార్థకం ఏమిటి?",
+      "options": [" దుఃఖంగా", "సంతోషంగా", "కోపంగా", "విస్మయంగా"],
+      "answer": "సంతోషంగా"
+    },
+    {
+      "question": "క్రింద తెలిపినదిలో ఏది క్రియ?",
+      "options": ["త్వరగా", " పరుగులు", "అందమైనది", "సంతోషం"],
+      "answer": "పరుగులు"
+    },
+    {
+      "question": "'వెళ్లడం' యొక్క గత కాలం ఏమిటి?",
+      "options": ["వెళ్ళింది", "వెళ్ళింది", "వెళ్ళెను", "వెళ్ళుతోంది"],
+      "answer": "వెళ్ళింది"
+    },
+    {
+      "question": "'కష్టమైనది' యొక్క వ్యతిరేకం ఏమిటి?",
+      "options": ["సులభం", "కష్టమైనది", "జటిలమైనది", "గతించేది"],
+      "answer": "సులభం"
+    },
+    {
+      "question": "క్రింద తెలిపినదిలో ఏది సరిగ్గా ఉంది?",
+      "options": ["పరుగులు", "నీలం", "సప్తరంగు", "త్వరగా"],
+      "answer": "సప్తరంగు"
+    }
+  ],
+  "pa": [
+    {
+      "question": "‘ਬੱਚਾ’ ਦਾ ਬਹੁਵਚਨ ਕੀ ਹੈ?",
+      "options": ["ਬੱਚੇ", "ਬੱਚੇ", "ਬੱਚੇਆਂ", "ਬੱਚੇ"],
+      "answer": "ਬੱਚੇ"
+    },
+    {
+      "question": "‘ਖੁਸ਼’ ਦਾ ਸਮਾਨਾਰਥੀ ਸ਼ਬਦ ਕੀ ਹੈ?",
+      "options": ["ਉਦਾਸ", "ਖੁਸ਼", "ਗੁੱਸੇ ਵਿੱਚ", "ਭ੍ਰਮਿਤ"],
+      "answer": "ਖੁਸ਼"
+    },
+    {
+      "question": "ਹੇਠਾਂ ਦਿੱਤੇ ਵਿੱਚੋਂ ਕਿਹੜਾ ਕ੍ਰਿਆ ਹੈ?",
+      "options": ["ਤੇਜ਼", "ਦੌੜ", "ਸੁੰਦਰ", "ਖੁਸ਼ੀ"],
+      "answer": "ਦੌੜ"
+    },
+    {
+      "question": "‘ਜਾਣਾ’ ਦਾ ਭੂਤਕਾਲ ਕੀ ਹੈ?",
+      "options": ["ਗਿਆ", "ਜਾਣਾ", "ਜਾਵਾਂਗਾ", "ਜਾਂਦੇ"],
+      "answer": "ਗਿਆ"
+    },
+    {
+      "question": "‘ਕਠਿਨ’ ਦਾ ਵਿਰੋਧੀ ਕੀ ਹੈ?",
+      "options": ["ਆਸਾਨ", "ਕਠਿਨ", "ਜਟਿਲ", "ਗਲਤ"],
+      "answer": "ਆਸਾਨ"
+    },
+    {
+      "question": "ਹੇਠਾਂ ਦਿੱਤੇ ਵਿੱਚੋਂ ਕਿਹੜਾ ਸੰज्ञਾ ਹੈ?",
+      "options": ["ਦੌੜ", "ਨੀਲਾ", "ਸੇਬ", "ਤੇਜ਼"],
+      "answer": "ਸੇਬ"
+    }
+  ],
+  "ko": [
+    {
+      "question": "'아이'의 복수형은 무엇인가요?",
+      "options": ["아이들", "아기들", "아이의", "아이들"],
+      "answer": "아이들"
+    },
+    {
+      "question": "'행복한'의 동의어는 무엇인가요?",
+      "options": ["슬픈", "기쁜", "화난", "혼란스러운"],
+      "answer": "기쁜"
+    },
+    {
+      "question": "다음 중 동사는 무엇인가요?",
+      "options": ["빠른", "달리다", "아름답다", "행복"],
+      "answer": "달리다"
+    },
+    {
+      "question": "'가다'의 과거형은 무엇인가요?",
+      "options": ["갔다", "간다", "갈 것이다", "가고 있다"],
+      "answer": "갔다"
+    },
+    {
+      "question": "'어려운'의 반대말은 무엇인가요?",
+      "options": ["쉬운", "어려운", "복잡한", "복잡한"],
+      "answer": "쉬운"
+    },
+    {
+      "question": "다음 중 명사는 무엇인가요?",
+      "options": ["달리다", "파란색", "사과", "빠르게"],
+      "answer": "사과"
+    }
+  ],
+  "ta": [
+    {
+      "question": "‘குழந்தை’ என்பதற்கான பன்மை என்ன?",
+      "options": ["குழந்தைகள்", "குழந்தைகள்", "குழந்தை", "குழந்தைகள்"],
+      "answer": "குழந்தைகள்"
+    },
+    {
+      "question": "‘ சந்தோஷமான’ என்பதற்கான சமர்த்தியான சொல் என்ன?",
+      "options": ["துக்கமான", "சந்தோஷமான", "கோபமாக", "மதிப்பிழந்த"],
+      "answer": "சந்தோஷமான"
+    },
+    {
+      "question": "கீழே உள்ளவற்றில் எந்தது செயல்?",
+      "options": ["வெகுந்த", "ஓடுங்கள்", "அழகு", "சந்தோஷம்"],
+      "answer": "ஓடுங்கள்"
+    },
+    {
+      "question": "‘போக’ என்பதற்கான முந்தைய காலம் என்ன?",
+      "options": ["போனார்", "போகிறார்", "போகப்போவான்", "போய்"],
+      "answer": "போனார்"
+    },
+    {
+      "question": "‘கஷ்டமான’ என்பதற்கான எதிர்மறை என்ன?",
+      "options": ["எளிதான", "கஷ்டமான", "சிக்கலான", "சிக்கலான"],
+      "answer": "எளிதான"
+    },
+    {
+      "question": "கீழே உள்ளவற்றில் எது பெயர்?",
+      "options": ["ஓடுங்கள்", "நீல", "ஆப்பிள்", "வெகுந்த"],
+      "answer": "ஆப்பிள்"
+    }
+  ],
+  "ar": [
+    {
+      "question": "ما هو الجمع لكلمة 'طفل'؟",
+      "options": ["أطفال", "طفل", "طفلين", "طفلات"],
+      "answer": "أطفال"
+    },
+    {
+      "question": "ما هو المرادف لكلمة 'سعيد'؟",
+      "options": ["حزين", "مبتهج", "غاضب", "مرتبك"],
+      "answer": "مبتهج"
+    },
+    {
+      "question": "أي من الخيارات التالية هو فعل؟",
+      "options": ["سريع", "يجري", "جميل", "سعادة"],
+      "answer": "يجري"
+    },
+    {
+      "question": "ما هو الماضي من 'يذهب'؟",
+      "options": ["ذهب", "يذهب", "سأذهب", "يذهب"],
+      "answer": "ذهب"
+    },
+    {
+      "question": "ما هو عكس 'صعب'؟",
+      "options": ["سهل", "صعب", "معقد", "متشابك"],
+      "answer": "سهل"
+    },
+    {
+      "question": "أي من الخيارات التالية اسم؟",
+      "options": ["يجري", "أزرق", "تفاح", "سريعاً"],
+      "answer": "تفاح"
+    }
+  ],
+  "fr": [
+    {
+      "question": "Quel est le pluriel de 'enfant'?",
+      "options": ["Enfants", "Enfant", "Enfantins", "Enfant"],
+      "answer": "Enfants"
+    },
+    {
+      "question": "Quel est un synonyme de 'heureux'?",
+      "options": ["Triste", "Joyeux", "Fâché", "Confus"],
+      "answer": "Joyeux"
+    },
+    {
+      "question": "Lequel des suivants est un verbe?",
+      "options": ["Rapide", "Courir", "Beau", "Bonheur"],
+      "answer": "Courir"
+    },
+    {
+      "question": "Quel est le passé de 'aller'?",
+      "options": ["Allé", "Va", "J'irai", "Allant"],
+      "answer": "Allé"
+    },
+    {
+      "question": "Quel est l'antonyme de 'difficile'?",
+      "options": ["Facile", "Difficile", "Complexe", "Déroutant"],
+      "answer": "Facile"
+    },
+    {
+      "question": "Lequel des suivants est un nom?",
+      "options": ["Courir", "Bleu", "Pomme", "Rapidement"],
+      "answer": "Pomme"
+    }
+  ],
+  "ur": [
+    {
+      "question": "‘بچہ’ کا جمع کیا ہے؟",
+      "options": ["بچے", "بچوں", "بچوں کے", "بچوں"],
+      "answer": "بچے"
+    },
+    {
+      "question": "‘خوش’ کا مترادف کیا ہے؟",
+      "options": ["اداس", "خوش", "غصے میں", "حیران"],
+      "answer": "خوش"
+    },
+    {
+      "question": "نیچے دیے گئے میں سے کون سا فعل ہے؟",
+      "options": ["تیز", "دوڑنا", "خوبصورت", "خوشی"],
+      "answer": "دوڑنا"
+    },
+    {
+      "question": "‘جانا’ کا ماضی کیا ہے؟",
+      "options": ["گیا", "جاتا", "جاؤں گا", "جا رہا ہوں"],
+      "answer": "گیا"
+    },
+    {
+      "question": "‘مشکل’ کا متضاد کیا ہے؟",
+      "options": ["آسان", "مشکل", "پیچیدہ", "مشکل"],
+      "answer": "آسان"
+    },
+    {
+      "question": "نیچے دیے گئے میں سے کون سا اسم ہے؟",
+      "options": ["دوڑ", "نیلا", "سیب", "تیز"],
+      "answer": "سیب"
+    }
+  ]
+}
