@@ -59,7 +59,13 @@ export default function WordGuessingGame() {
   
     
     // socket = io('https://socket-server-mfkb.onrender.com');
-    socket = io('https://translate.beasthub.tech/scribble');
+    const socketServerUrl = process.env.NEXT_PUBLIC_SOCKET_SERVER_URL;
+    if (!socketServerUrl) {
+      console.error('Socket server URL is not defined');
+      return;
+    }
+    const socket = io(socketServerUrl);
+
   
     const storedUsername = localStorage.getItem('username');
     if (storedUsername) {
