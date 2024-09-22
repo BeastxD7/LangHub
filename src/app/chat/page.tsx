@@ -98,7 +98,9 @@ const ChatPage = () => {
       setUserColors(JSON.parse(storedColors));
     }
 
-    socketRef.current = io("https://chat-backend-op91.onrender.com");
+    // socketRef.current = io("https://chat-backend-op91.onrender.com");
+    socketRef.current = io("https://chat.beasthub.tech/");
+
 
     socketRef.current.on("load-messages", (messages: ChatMessage[]) => {
       setChat(messages);
