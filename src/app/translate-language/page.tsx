@@ -1,4 +1,5 @@
-// app/test/page.tsx
+
+import React from 'react';
 import TranslationForm from '../../components/TranslationForm';
 
 const TestPage = () => {

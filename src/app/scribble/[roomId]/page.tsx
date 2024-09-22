@@ -57,7 +57,7 @@ export default function WordGuessingGame() {
   useEffect(() => {
     if (!roomId) return;
   
-  // socket = io('http://localhost:4000');
+  // socket = io('https://beasthub.tech/socket.io/');
     socket = io('https://socket-server-mfkb.onrender.com');
   
     const storedUsername = localStorage.getItem('username');

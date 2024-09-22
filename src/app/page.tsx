@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from "../components/ui/button";
@@ -8,6 +8,7 @@ import SparklesText from "../components/magicui/sparkles-text";
 import { TextGenerateEffect } from "../components/ui/text-generate-effect";
 import TypingEffect from "../components/TypingEffect";
 import { Menu, X } from 'lucide-react';
+import Image from 'next/image';  // Import the Image component
 
 const features = [
   "WordMaster",
@@ -28,7 +29,6 @@ export default function LangHubLandingPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-indigo-900 to-purple-900 text-white overflow-hidden">
-
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
@@ -64,43 +64,56 @@ export default function LangHubLandingPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-center max-w-3xl"
+          className="flex flex-col lg:flex-row items-center justify-center lg:space-x-8 max-w-7xl mx-auto text-center lg:text-left"
         >
-          <SparklesText className="text-5xl sm:text-7xl font-bold mb-6" text="LangHub" />
+          {/* Text content */}
+          <div className="lg:w-1/2 flex flex-col justify-center items-center mt-8 md:mt-0">
+            <SparklesText className="text-5xl sm:text-7xl font-bold mb-6" text="LangHub" />
 
-          <TextGenerateEffect
-            className="text-xl sm:text-2xl text-gray-300 mb-8"
-            words="Immerse yourself in exciting language learning experiences and enhance your skills!"
-          />
+            <TextGenerateEffect
+              className="text-xl sm:text-2xl text-gray-300 mb-8"
+              words="Immerse yourself in exciting language learning experiences and enhance your skills!"
+            />
 
-          <div className="h-20 mb-12">
-            <TypingEffect features={[
-              "Learn multiple languages",
-              "Challenge friends worldwide",
-              "Enjoy real-time gameplay",
-              "Improve your vocabulary",
-              "Track your progress",
-              "Have fun while learning",
-            ]} />
+            <div className="h-14">
+              <TypingEffect features={[
+                "Learn multiple languages",
+                "Challenge friends worldwide",
+                "Enjoy real-time gameplay",
+                "Improve your vocabulary",
+                "Track your progress",
+                "Have fun while learning",
+              ]} />
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.5 }}
+            >
+              <Link href="/menu">
+                <Button
+                  size="lg"
+                  className="bg-purple-600 text-white hover:bg-purple-700 transition-all duration-300 transform hover:scale-105 px-8 py-3 text-lg rounded-full"
+                >
+                  Get Started
+                </Button>
+              </Link>
+            </motion.div>
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.5 }}
-          >
-            <Link href="/menu">
-              <Button
-                size="lg"
-                className="bg-purple-600 text-white hover:bg-purple-700 transition-all duration-300 transform hover:scale-105 px-8 py-3 text-lg rounded-full"
-              >
-                Get Started
-              </Button>
-            </Link>
-          </motion.div>
+          {/* Image Section */}
+          <div className="lg:w-1/2 mt-8 lg:mt-0">
+            <Image 
+              src="/landing-image.png"  // Your image path here
+              alt="Language Learning Illustration"
+              width={900}  // Adjust width
+              height={400}  // Adjust height
+              className="rounded-lg "
+            />
+          </div>
         </motion.div>
       </main>
-
 
       {/* Animated background elements */}
       <div className="fixed inset-0 z-[-1] overflow-hidden">
