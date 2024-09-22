@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from "../components/ui/button";
@@ -30,7 +30,7 @@ const features = [
     title: "Word Scribble",
     description: "Real-time word guessing game with friends.",
     content: "Word Scribble brings the excitement of real-time word guessing to your fingertips. Create your own game rooms or join existing ones to play with friends or language enthusiasts worldwide. This game is perfect for improving your language skills while having a blast with others.",
-    image: "/word-scribble.gif",
+    image: "/word-scribble.png",
     route: "/scribble"
   },
   {
@@ -44,7 +44,7 @@ const features = [
     title: "Sentence Builder",
     description: "Arrange jumbled words to form correct sentences.",
     content: "Sentence Builder is your go-to tool for mastering sentence structure. We present you with jumbled words, and your task is to arrange them into proper sentences. This exercise enhances your understanding of grammar, word order, and sentence flow. Available in multiple languages, it's an excellent way to improve your writing and comprehension skills.",
-    image: "/sentence-builder.gif",
+    image: "/sentence-builder.png",
     route: "/sentence-builder"
   },
   {
@@ -59,14 +59,14 @@ const features = [
     description: "Real-time chat with automatic translation.",
     content: "Break down language barriers with our Chat with Translation feature. Engage in real-time conversations with people around the world, and let our automatic translation take care of the rest. Whether you're practicing a new language or need to communicate with someone who speaks a different language, this tool makes cross-language communication seamless and effortless.",
     image: "/chat-translation.png",
-    route: "/chat-translation"
+    route: "/chat"
   },
   {
     "title": "What Are You Waiting For?",
     "description": "Take the leap and achieve your goals today!",
     "content": "Don't wait for the perfect moment, create it! Whether it's starting a new project, learning a new skill, or reaching out to new connections, now is the time to make things happen. Stop hesitating and embrace the possibilities. With the right tools and mindset, you can achieve more than you ever imagined. What are you waiting for?",
     "image": "/what-are-you-waiting-for.png",
-    "route": "/get-started"
+    "route": "/menu"
   }
 ];
 
@@ -75,12 +75,12 @@ export default function LangHubLandingPage() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [scrollY, setScrollY] = useState(0);
 
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-  const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
+  const toggleMenu = useCallback(() => setIsMenuOpen(prev => !prev), []);
+  const toggleDropdown = useCallback(() => setIsDropdownOpen(prev => !prev), []);
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -108,6 +108,8 @@ export default function LangHubLandingPage() {
                   <button
                     onClick={toggleDropdown}
                     className="flex items-center text-white hover:text-purple-300 transition-colors"
+                    aria-expanded={isDropdownOpen}
+                    aria-haspopup="true"
                   >
                     Features <ChevronDown className="ml-1" />
                   </button>
@@ -140,6 +142,8 @@ export default function LangHubLandingPage() {
               <button
                 onClick={toggleMenu}
                 className="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-purple-300 focus:outline-none"
+                aria-expanded={isMenuOpen}
+                aria-label="Toggle menu"
               >
                 {isMenuOpen ? <X /> : <Menu />}
               </button>
@@ -231,6 +235,9 @@ export default function LangHubLandingPage() {
                 width={900}
                 height={400}
                 className="rounded-lg"
+                priority
+                placeholder="blur"
+                blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACklEQVR4nGMAAQAABQABDQottAAAAABJRU5ErkJggg=="
               />
             </div>
           </motion.div>
@@ -241,7 +248,10 @@ export default function LangHubLandingPage() {
           <h2 className="text-4xl font-bold text-center mb-12 pt-20">Our Features</h2>
           <div className="h-[calc(100vh-6rem)] w-screen">
             <StickyScroll 
-              content={features}
+              content={features.map(feature => ({
+                ...feature,
+                content: feature.content // Ensure content is a string
+              }))}
               imageSize={{ width: 800, height: 600 }}
             />
           </div>
@@ -288,10 +298,10 @@ export default function LangHubLandingPage() {
         />
       </div>
       <footer className="bg-gray-900 py-8">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <p>&copy; 2023 LangHub. All rights reserved.</p>
-          </div>
-        </footer>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <p>&copy; 2023 LangHub. All rights reserved.</p>
+        </div>
+      </footer>
     </div>
   );
 }
