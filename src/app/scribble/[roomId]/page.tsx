@@ -59,8 +59,8 @@ export default function WordGuessingGame() {
     if (!roomId) return;
   
     
-    // socket = io('https://socket-server-mfkb.onrender.com');
-    socket = io('https://translate.beasthub.tech/');
+    socket = io('https://socket-server-mfkb.onrender.com');
+    // socket = io('https://translate.beasthub.tech/');
 
 
 
