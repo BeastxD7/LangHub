@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Check, X } from 'lucide-react';
+import Navbar from '../../components/Navbar';
 
 interface Question {
   question: string;
@@ -52,7 +53,9 @@ const LanguageQuizPage = () => {
   };
 
   return (
+    <>
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-indigo-900 to-purple-900 flex items-center justify-center p-4">
+      <Navbar />  
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -200,6 +203,7 @@ const LanguageQuizPage = () => {
         )}
       </motion.div>
     </div>
+    </>
   );
 };
 

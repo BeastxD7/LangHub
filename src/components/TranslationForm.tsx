@@ -11,6 +11,7 @@ import {
   File,
   Loader,
 } from "lucide-react";
+import Navbar from "./Navbar";
 
 const supportedLanguages = [
   { code: "en", name: "English" },
@@ -149,6 +150,7 @@ const TranslationForm = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-indigo-900 to-purple-900 flex items-center justify-center p-4">
+      <Navbar />  
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

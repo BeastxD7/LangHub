@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { wordData } from "../../utils/wordData"; // Ensure this path is correct
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Check, X, Globe, Brain, Trophy, Zap } from 'lucide-react';
+import Navbar from "../../components/Navbar";
 
 interface WordItem {
   word: string;
@@ -107,6 +108,7 @@ const WordGame: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-indigo-900 to-purple-900 p-4 md:p-8 w-full flex items-center justify-center h-screen">
+      <Navbar />  
       <div className="max-w-4xl mx-auto">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}

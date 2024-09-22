@@ -11,6 +11,7 @@ import { Button } from "../../../components/ui/button";
 import { Progress } from "../../../components/ui/progress";
 import { Clock } from 'lucide-react';
 import React from 'react';
+import Navbar from '../../../components/Navbar';
 
 
 interface Player {
@@ -201,7 +202,7 @@ export default function WordGuessingGame() {
         >
           <Card className="bg-gray-800 bg-opacity-50 border-gray-700 hover:bg-opacity-70 transition-all duration-300">
             <CardHeader>
-              <CardTitle className="text-3xl font-bold text-white text-center">Word Guessing Game</CardTitle>
+              <CardTitle className="text-3xl font-bold  text-white text-center">Word Guessing Game</CardTitle>
               <CardDescription className="text-gray-300 text-center">Create a new room or join an existing one</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -234,6 +235,7 @@ export default function WordGuessingGame() {
   if (!username) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-gray-900 via-indigo-900 to-purple-900 flex items-center justify-center p-4">
+       
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -275,6 +277,7 @@ export default function WordGuessingGame() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-indigo-900 to-purple-900 p-4 sm:p-6 md:p-10">
+      
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
