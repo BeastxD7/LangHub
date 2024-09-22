@@ -59,12 +59,9 @@ export default function WordGuessingGame() {
   
     
     // socket = io('https://socket-server-mfkb.onrender.com');
-    const socketServerUrl = process.env.NEXT_PUBLIC_SOCKET_SERVER_URL;
-    if (!socketServerUrl) {
-      console.error('Socket server URL is not defined');
-      return;
-    }
-    const socket = io(socketServerUrl);
+    socket = io('https://translate.beasthub.tech/');
+
+
 
   
     const storedUsername = localStorage.getItem('username');
