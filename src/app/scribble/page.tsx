@@ -36,26 +36,36 @@ export default function ScribblePage() {
   };
 
   const joinRoom = async () => {
-    if (roomId.trim()) {
+    const trimmedRoomId = roomId.trim().toLowerCase();
+  
+    if (trimmedRoomId) {
       try {
         const response = await fetch(
-          // `http://localhost:4000/check-room/${roomId}`
-          `https://socket-server-mfkb.onrender.com/check-room/${roomId}`
+          // `https://socket-server-mfkb.onrender.com/check-room/${trimmedRoomId}`
+          `https://scribble.beasthub.tech/check-room/${trimmedRoomId}`
 
         );
+  
+        // Check if the response is OK (status code in the range 200-299)
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+  
         const data = await response.json();
-
+  
         if (data.exists) {
-          router.push(`/scribble/${roomId}`); // Redirect to the specific roomId route
+          router.push(`/scribble/${trimmedRoomId}`);
         } else {
-          setErrorMessage("No room exists with the specified Room ID"); // Set error message if room doesn't exist
+          setErrorMessage("No room exists with the specified Room ID");
         }
       } catch (error) {
         console.error("Error checking room:", error);
-        setErrorMessage("An error occurred while checking the room ID."); // Set error message on error
+        setErrorMessage("An error occurred while checking the room ID.");
       }
     }
   };
+  
+  
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-indigo-900 to-purple-900 p-6 sm:p-10 flex items-center justify-center">
