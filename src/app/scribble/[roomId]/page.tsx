@@ -368,6 +368,11 @@ export default function WordGuessingGame() {
                     type="text"
                     value={guess}
                     onChange={(e) => setGuess(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        handleGuessSubmit();
+                      }
+                    }}
                     className="flex-grow bg-gray-700 text-white placeholder-gray-400 border-gray-600"
                     disabled={isGuessDisabled}
                     placeholder="Your guess..."
