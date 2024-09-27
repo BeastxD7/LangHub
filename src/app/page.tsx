@@ -9,7 +9,7 @@ import { TextGenerateEffect } from "../components/ui/text-generate-effect";
 import TypingEffect from "../components/TypingEffect";
 import { Menu, X, ChevronDown } from 'lucide-react';
 import Image from 'next/image';
-import { StickyScroll } from "../components/ui/sticky-scroll-reveal";
+import FeatureShowcase from '../components/FeatureShowcase';
 
 const features = [
   {
@@ -61,13 +61,6 @@ const features = [
     image: "/chat-translation.png",
     route: "/chat"
   },
-  {
-    "title": "What Are You Waiting For?",
-    "description": "Take the leap and achieve your goals today!",
-    "content": "Don't wait for the perfect moment, create it! Whether it's starting a new project, learning a new skill, or reaching out to new connections, now is the time to make things happen. Stop hesitating and embrace the possibilities. With the right tools and mindset, you can achieve more than you ever imagined. What are you waiting for?",
-    "image": "/what-are-you-waiting-for.png",
-    "route": "/menu"
-  }
 ];
 
 export default function LangHubLandingPage() {
@@ -122,7 +115,7 @@ export default function LangHubLandingPage() {
                         transition={{ duration: 0.2 }}
                         className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10"
                       >
-                        {features.slice(0, 7).map((feature) => (
+                        {features.map((feature) => (
                           <Link
                             key={feature.title}
                             href={feature.route}
@@ -163,7 +156,7 @@ export default function LangHubLandingPage() {
             className="fixed inset-0 bg-gray-900 bg-opacity-95 z-40 flex items-center justify-center md:hidden"
           >
             <div className="text-center">
-              {features.slice(0, 7).map((feature) => (
+              {features.map((feature) => (
                 <motion.div
                   key={feature.title}
                   initial={{ opacity: 0, y: 20 }}
@@ -243,18 +236,10 @@ export default function LangHubLandingPage() {
           </motion.div>
         </section>
 
-        {/* Features Section with StickyScroll */}
-        <section className="w-screen min-h-screen">
-          <h2 className="text-4xl font-bold text-center mb-12 pt-20">Our Features</h2>
-          <div className="h-[calc(100vh-6rem)] w-screen">
-            <StickyScroll 
-              content={features.map(feature => ({
-                ...feature,
-                content: feature.content // Ensure content is a string
-              }))}
-              imageSize={{ width: 800, height: 600 }}
-            />
-          </div>
+        {/* Features Section with FeatureShowcase */}
+        <section className="w-full min-h-screen py-20">
+          <h2 className="text-4xl font-bold text-center mb-12">Our Features</h2>
+          <FeatureShowcase features={features} />
         </section>
       </main>
 
