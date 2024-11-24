@@ -99,7 +99,7 @@ const ChatPage = () => {
     }
 
     // socketRef.current = io("https://chat-backend-op91.onrender.com");
-    socketRef.current = io("https://chat.beasthub.tech/");
+    socketRef.current = io("https://chat-backend-op91.onrender.com");
 
 
     socketRef.current.on("load-messages", (messages: ChatMessage[]) => {
