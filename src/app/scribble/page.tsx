@@ -41,8 +41,8 @@ export default function ScribblePage() {
     if (trimmedRoomId) {
       try {
         const response = await fetch(
-          // `https://socket-server-mfkb.onrender.com/check-room/${trimmedRoomId}`
-          `https://scribble.beasthub.tech/check-room/${trimmedRoomId}`
+           `https://socket-server-mfkb.onrender.com/check-room/${trimmedRoomId}`
+          //`https://scribble.beasthub.tech/check-room/${trimmedRoomId}`
 
         );
   
